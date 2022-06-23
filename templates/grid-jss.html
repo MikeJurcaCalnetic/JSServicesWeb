@@ -1,0 +1,2118 @@
+﻿{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="{% static 'assets-grid-jss/style.css' %}"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    <script>
+
+        
+        function getSymbol(name) {
+
+            const AllSymbols = ["BTC", "ETH", "USDT", "USDC", "BNB", "BUSD", "ADA", "XRP", "SOL", "DOGE", "DOT", "DAI", "TRX", "LEO", "SHIB", "WBTC", "AVAX", "MATIC", "UNI", "LTC", "FTT", "LINK", "CRO", "XLM", "NEAR", "ALGO", "BCH", "ATOM", "ETC", "XMR", "VET", "MANA", "FLOW", "HBAR", "ICP", "EGLD", "FIL", "THETA", "APE", "XTZ", "HNT", "SAND", "TUSD", "BSV", "AXS", "KCS", "ZEC", "USDP", "EOS", "MKR", "AAVE", "MIOTA", "HT", "USDN", "GRT", "BTT", "KLAY", "XEC", "USDD", "OKB", "WAVES", "FTM", "QNT", "NEO", "PAXG", "RUNE", "BAT", "CHZ", "ZIL", "LRC", "STX", "DASH", "GMT", "CAKE", "KSM", "FEI", "ENJ", "CELO", "CRV", "GALA", "AMP", "1INCH", "NEXO", "XDC", "HOT", "XEM", "SNX", "KAVA", "MINA", "DCR", "GT", "ONE", "AR", "KDA", "XYM", "QTUM", "GNO", "BTG", "COMP", "BORA", "IOST", "CVX", "AUDIO", "TFUEL", "ROSE", "OMG", "ICX", "STORJ", "TWT", "IOTX", "KNC", "ANKR", "ZRX", "GLM", "SRM", "RVN", "CEL", "JST", "SXP", "ONT", "MXC", "SC", "WOO", "LPT", "BTRST", "YFI", "GLMR", "WAXP", "SKL", "IMX", "BAL", "GUSD", "CHSB", "ENS", "ZEN", "NFT", "HIVE", "POLY", "XCH", "UMA", "LDO", "SCRT", "SUSHI", "DGB", "PLA", "ELON", "CSPR", "RSR", "MX", "LSK", "KEEP", "EPS", "BNT", "RNDR", "RENBTC", "VGX", "ORBS", "PEOPLE", "NU", "PUNDIX", "CKB", "MED", "OCEAN", "ONG", "CEEK", "ACA", "CHR", "REV", "WXT", "SUSD", "CELR", "XPRT", "REN", "XNO", "WIN", "POWR", "FLUX", "ILV", "CFX", "VLX", "ARDR", "SNT", "RLY", "C98", "COTI", "DYDX", "OGN", "MTL", "REP", "TEL", "DAO", "CVC", "DENT", "CTSI", "WRX", "SYS", "STEEM", "DAG", "USTC", "FXS"];
+
+            var coinSymbol = name;
+            var currency = "";
+
+            AllSymbols.forEach(theSymbol => {
+
+                if (name.indexOf(theSymbol) == 0) {
+                    coinSymbol = theSymbol;
+                    currency = name.replace(coinSymbol, '');
+
+                    return;
+                }
+
+            });
+
+            symbolObject = {
+                coinSymbol: coinSymbol,
+                currency: currency
+            };
+
+            return symbolObject;
+        }
+
+
+    </script>
+    
+    
+    <style>
+        @-webkit-keyframes spinner {
+            to {
+                -webkit-transform: rotate(360deg);
+                transform: rotate(360deg)
+            }
+        }
+
+        @keyframes spinner {
+            to {
+                -webkit-transform: rotate(360deg);
+                transform: rotate(360deg)
+            }
+        }
+
+        @font-face {
+            font-family: "gothambook";
+            src: url(../fonts/gotham_book_regular-webfont.eot);
+            src: url(../fonts/gotham_book_regular-webfont.eot?#iefix) format("embedded-opentype"), url(../fonts/gotham_book_regular-webfont.woff2) format("woff2"), url(../fonts/gotham_book_regular-webfont.woff) format("woff"), url(../fonts/gotham_book_regular-webfont.ttf) format("truetype"), url(../fonts/gotham_book_regular-webfont.svg#gothambook) format("svg");
+            font-weight: 400;
+            font-style: normal
+        }
+
+        /**START section-trades colors*/
+
+        .R {
+            color: #000 !important;
+            background: #00FF00 !important;
+        }
+
+        .plus-c {
+            color: #000 !important;
+            background: #00FFFF !important;
+        }
+
+        .plus-c-plus-var {
+            color: #000 !important;
+            background: #90FAFA !important;
+        }
+
+        .UT4 {
+            color: #FFF !important;
+            background: #FF0000 !important;
+        }
+
+        .UL08 {
+            color: #FFF !important;
+            background: #B22222 !important;
+        }
+
+        .UL07 {
+            color: #FFF !important;
+            background: #B22222 !important;
+        }
+
+        .UT3 {
+            color: #FFF !important;
+            background: #FF0000 !important;
+        }
+
+        .UL05 {
+            color: #FFF !important;
+            background: #B22222 !important;
+        }
+
+        .UL04 {
+            color: #FFF !important;
+            background: #B22222 !important;
+        }
+
+        .UT2 {
+            color: #FFF !important;
+            background: #FF0000 !important;
+        }
+
+        .UL02 {
+            color: #FFF !important;
+            background: #B22222 !important;
+        }
+
+        .UT1 {
+            color: #FFF !important;
+            background: #FF0000 !important;
+        }
+
+        .CRX-plus {
+            color: #000 !important;
+            background: #FF48FB !important;
+        }
+
+        .UP {
+            color: #FFF !important;
+            background: #FF0000 !important;
+        }
+
+        .CR-plus {
+            color: #FFF !important;
+            background: #8B4513 !important;
+        }
+
+        .DIR {
+            color: #000 !important;
+            background: #FFFF00 !important;
+        }
+
+        .CR-minus {
+            color: #FFF !important;
+            background: #8B4513 !important;
+        }
+
+        .DP {
+            color: #FFF !important;
+            background: #0000FF !important;
+        }
+
+        .CRX-minus {
+            color: #FFF !important;
+            background: #9370DB !important;
+        }
+
+        .DT1 {
+            color: #FFF !important;
+            background: #0000FF !important;
+        }
+
+        .DL02 {
+            color: #FFF !important;
+            background: #0000CD !important;
+        }
+
+        .DT2 {
+            color: #FFF !important;
+            background: #0000FF !important;
+        }
+
+        .DL04 {
+            color: #FFF !important;
+            background: #0000CD !important;
+        }
+
+        .DL05 {
+            color: #FFF !important;
+            background: #0000CD !important;
+        }
+
+        .DT3 {
+            color: #FFF !important;
+            background: #0000FF !important;
+        }
+
+        .DL07 {
+            color: #FFF !important;
+            background: #0000CD !important;
+        }
+
+        .DL08 {
+            color: #FFF !important;
+            background: #0000CD !important;
+        }
+
+        .DT4 {
+            color: #FFF !important;
+            background: #0000FF !important;
+        }
+
+        .minus-c {
+            color: #FFF !important;
+            background: #FF00FF !important;
+        }
+
+        .minus-c-plus-var {
+            color: #FFF !important;
+            background: #FF74FF !important;
+        }
+
+        .risk-off {
+            color: #00F !important;
+            background: #0F0 !important;
+        }
+
+        .less-risk {
+            color: #00F !important;
+            background: #0FF !important;
+        }
+
+        .at-risk {
+            color: #F00 !important;
+            background: #FF0 !important;
+        }
+
+        .risk-on {
+            color: #FF0 !important;
+            background: #F00 !important;
+        }
+
+        .pivotal {
+            color: #FFF !important;
+            background: #9900FF !important;
+            overflow: hidden;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center
+        }
+
+        /**END section-trades colors*/
+
+
+        * {
+            -webkit-box-sizing: border-box !important;
+            box-sizing: border-box !important
+        }
+
+        .red {
+            color: red;
+        }
+
+        .blue {
+            color: blue;
+        }
+
+        body {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            margin: 0;
+            font-family: 'Roboto', sans-serif !important;
+            // letter-spacing: 1px !important;
+        }
+
+        .active {
+            display: block !important
+        }
+
+        li.active {
+            font-weight: 600
+        }
+
+        .show {
+            overflow: visible !important
+        }
+
+            .show ul {
+                overflow-y: auto
+            }
+
+            .show.filter-symbol ul {
+                min-width: 100%;
+                width: auto !important
+            }
+
+            .section-info .info-wrap #tab1 .area1::-webkit-scrollbar,
+            .show ul::-webkit-scrollbar {
+                background-color: #eaeaea;
+                width: 5px
+            }
+
+            .show ul::-webkit-scrollbar-thumb {
+                background-color: #a6a6a6
+            }
+
+            .show .filter-item {
+                display: block !important;
+                padding-right: 35px !important
+            }
+
+            .show.filter-date .filter-item:not(:first-child).active:before,
+            .show.filter-indicator .filter-item:not(:first-child).active:before,
+            .show.filter-symbol .filter-item:not(:first-child).active:before {
+                display: none
+            }
+
+            .show.filter-date .filter-item:first-child:before,
+            .show.filter-indicator .filter-item:first-child:before,
+            .show.filter-symbol .filter-item:first-child:before {
+                display: block important;
+                -webkit-transform: translateY(-50%) rotate(180deg) !important;
+                transform: translateY(-50%) rotate(180deg) !important
+            }
+
+        .hiden-item,
+        .page-jss {
+            position: relative
+        }
+
+            .hiden-item::before {
+                position: absolute;
+                content: "";
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                z-index: 9990;
+                background-color: rgba(0, 0, 0, .5)
+            }
+
+        .page-jss {
+            max-width: 1920px !important;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr minmax(300px, 20%) minmax(520px, 1fr);
+            grid-template-rows: auto 25px;
+            grid-template-areas: "sectionBoxes sectionTrades sectionInfo""sectionBoxes sectionDate sectionInfo";
+            row-gap: 5px;
+            -webkit-column-gap: 10px;
+            -moz-column-gap: 10px;
+            column-gap: 50px;
+            padding: 5px;
+            min-height: 100px;
+            background-color: #fff;
+            max-height: 913px;
+            height: calc(100vh - 47px)
+        }
+
+        p {
+            margin: 0;
+            font-size: 15px;
+            line-height: 20px
+        }
+
+        h2,
+        h3 {
+            font-size: 18px;
+            margin: 0 0 15px
+        }
+
+        h3 {
+            margin: 0
+        }
+
+        .page-jss-loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, .7);
+            z-index: 9999
+        }
+
+            .page-jss-loading::before {
+                content: "";
+                -webkit-box-sizing: border-box;
+                box-sizing: border-box;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 20px;
+                height: 20px;
+                margin-top: -10px;
+                margin-left: -10px;
+                border-radius: 50%;
+                border: 2px solid transparent;
+                border-top-color: #07d;
+                border-bottom-color: #07d;
+                -webkit-animation: spinner .8s ease infinite;
+                animation: spinner .8s ease infinite
+            }
+
+        .section-info,
+        .section-trades {
+            overflow: hidden
+        }
+
+        .section-boxes {
+            display: grid;
+            grid-template-rows: 30px 40px auto;
+            row-gap: 10px;
+            max-height: 913px;
+            height: 100%;
+            grid-area: sectionBoxes
+        }
+
+            .section-boxes .header {
+                position: relative;
+                display: grid;
+                grid-template-columns: minmax(auto,160px) 2fr 2fr 25px;
+                -webkit-column-gap: 7px;
+                -moz-column-gap: 7px;
+                column-gap: 7px;
+                grid-template-rows: 1fr
+            }
+
+                .section-boxes .header .refresh-button {
+                    cursor: pointer
+                }
+
+                    .section-boxes .header .refresh-button svg {
+                        width: 25px;
+                        height: 25px
+                    }
+
+                .section-boxes .header .item {
+                    padding: 2px;
+                    display: -webkit-box;
+                    display: -ms-flexbox;
+                    display: flex;
+                    -webkit-box-align: center;
+                    -ms-flex-align: center;
+                    align-items: center;
+                    -webkit-box-pack: start;
+                    -ms-flex-pack: start;
+                    justify-content: flex-start;
+                    border: 1px solid #000;
+                    border-radius: 5px
+                }
+
+                .section-boxes .header .filter {
+                    position: relative;
+                    overflow: hidden;
+                    z-index: 999;
+                    cursor: pointer
+                }
+
+                    .section-boxes .header .filter.filter-date:after {
+                        position: absolute;
+                        content: url('data:image/svg+xml;utf8,<svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M19.1667 2.875H20.125C21.7101 2.875 23 4.16492 23 5.75V20.125C23 21.7101 21.7101 23 20.125 23H2.875C1.28992 23 0 21.7101 0 20.125V5.75C0 4.16492 1.28992 2.875 2.875 2.875H3.83327V0.958275C3.83327 0.42939 4.26266 0 4.79173 0H5.75C6.27906 0 6.70827 0.42939 6.70827 0.958275V2.875H16.2917V0.958275C16.2917 0.42939 16.7209 0 17.25 0H18.2083C18.7373 0 19.1667 0.42939 19.1667 0.958275V2.875ZM20.125 21.0833C20.653 21.0833 21.0833 20.653 21.0833 20.125V9.6217H1.91673V20.125C1.91673 20.653 2.34699 21.0833 2.875 21.0833H20.125Z" fill="black"/></svg>');
+                        left: 15px;
+                        top: 50%;
+                        -webkit-transform: translateY(-50%);
+                        transform: translateY(-50%);
+                        z-index: 1000
+                    }
+
+                    .section-boxes .header .filter:first-child {
+                        padding-left: 35px
+                    }
+
+                    .section-boxes .header .filter.filter-date .filter-item.active:before,
+                    .section-boxes .header .filter.filter-date .filter-item:first-child:before,
+                    .section-boxes .header .filter.filter-indicator .filter-item.active:before,
+                    .section-boxes .header .filter.filter-indicator .filter-item:first-child:before,
+                    .section-boxes .header .filter.filter-symbol .filter-item.active:before,
+                    .section-boxes .header .filter.filter-symbol .filter-item:first-child:before {
+                        position: absolute;
+                        content: url('data:image/svg+xml;utf8,<svg width="14" height="8" viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13.8602 1.4569L7.32252 7.86249C7.22912 7.95412 7.12166 8 7.0001 8C6.87854 8 6.77088 7.95412 6.67743 7.86249L0.14033 1.4569C0.0466785 1.36513 0 1.25984 0 1.14068C0 1.02156 0.0468259 0.916123 0.14033 0.82455L0.841588 0.137457C0.935092 0.045835 1.0427 4.81606e-05 1.16426 4.81606e-05C1.28582 4.81606e-05 1.39343 0.045835 1.48693 0.137457L7.0001 5.53954L12.5135 0.13712C12.6069 0.0454984 12.7146 0 12.8359 0C12.9577 0 13.0653 0.0457873 13.1588 0.13712L13.8601 0.824502C13.9536 0.916075 14 1.02156 14 1.14063C14 1.25984 13.9536 1.36528 13.8602 1.4569Z" fill="black"/></svg>');
+                        right: 15px;
+                        top: 50%;
+                        -webkit-transform: translateY(-50%);
+                        transform: translateY(-50%);
+                        z-index: 1000
+                    }
+
+                    .section-boxes .header .filter.filter-date .filter-item:first-child:before,
+                    .section-boxes .header .filter.filter-indicator .filter-item:first-child:before,
+                    .section-boxes .header .filter.filter-symbol .filter-item:first-childbefore {
+                        display: none;
+                        z-index: 1000
+                    }
+
+                    .section-boxes .header .filter ul {
+                        position: absolute;
+                        padding-left: 0;
+                        margin: 0;
+                        top: 0;
+                        background-color: #fff;
+                        width: 100%;
+                        max-height: 300px
+                    }
+
+                    .section-boxes .header .filter.filter-date ul {
+                        width: calc(100% - 25px)
+                    }
+
+                    .section-boxes .header .filter ul li {
+                        list-style-type: none;
+                        padding: 4.5px 4.5px 4.5px 4.5px;
+                        margin: 0
+                    }
+
+                    .section-boxes .header .filter .filter-item {
+                        display: none;
+                        position: relative
+                    }
+
+                    .section-boxes .header .filter.filter-date .filter-item.active,
+                    .section-info .header .download a:hover {
+                        color: #5d9aeb
+                    }
+
+            .section-boxes .boxes-wrap {
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                -ms-flex-wrap: wrap;
+                flex-wrap: wrap;
+                -ms-flex-line-pack: start;
+                align-content: flex-start;
+                grid-template-columns: repeat(7, 1fr);
+                grid-template-rows: repeat(20, calc(100%/7));
+                row-gap: 2px;
+                -webkit-column-gap: 5px;
+                -moz-column-gap: 5px;
+                column-gap: 2px;
+                max-height: 868px;
+                overflow-y: auto;
+                background-color: white;
+            }
+
+                .section-boxes .boxes-wrap::-webkit-scrollbar {
+                    background-color: #eaeaea;
+                    width: 10px
+                }
+
+                .section-boxes .boxes-wrap::-webkit-scrollbar-thumb {
+                    background-color: #a6a6a6
+                }
+
+                .section-boxes .boxes-wrap .itemWrap {
+                    position: relative;
+                    width: calc(100%/7 - 5px);
+                    height: 100px;
+                    min-width: 90px;
+                    cursor: pointer
+                }
+
+                .section-boxes .boxes-wrap .itemAffects {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    border-radius: 0px;
+                    padding: 5px;
+                    height: 100%;
+                    width: 100%
+                }
+
+                .section-boxes .boxes-wrap .item {
+                    border-radius: 0px;
+                    padding: 5px;
+                    background-color: #fff;
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    grid-template-rows: 25% 50% 25%;
+                    grid-template-areas: "trendtype trendtype""symbol symbol""marketState rValue";
+                    -webkit-transition: .2s;
+                    transition: .2s;
+                    height: 100%;
+                    width: 100%;
+                    position: relative
+                }
+
+                    .section-boxes .boxes-wrap .item:before {
+                        position: absolute;
+                        content: "";
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%
+                    }
+
+                    .section-boxes .boxes-wrap .item.active_cell {
+                        padding: 7px
+                    }
+
+                        .section-boxes .boxes-wrap .item.active_cell ~ .itemAffects {
+                            border: 4px solid rgba(104, 104, 104, .7)
+                        }
+
+                .section-boxes .boxes-wrap .itemWrap:hover {
+                    -webkit-transform: scale(.9);
+                    transform: scale(.9);
+                    -webkit-transition: .1s;
+                    transition: .1s
+                }
+
+                .section-boxes .boxes-wrap .item .trendtype {
+                    grid-area: trendtype;
+                }
+
+                .section-boxes .boxes-wrap .item .symbol,
+                .section-trades .header {
+                    display: -webkit-box;
+                    display: -ms-flexbox;
+                    display: flex;
+                    -webkit-box-pack: center;
+                    -ms-flex-pack: center;
+                    justify-content: center;
+                    -webkit-box-align: center;
+                    -ms-flex-align: center;
+                    align-items: center
+                }
+
+                .section-boxes .boxes-wrap .item .symbol {
+                    grid-area: symbol;
+                    text-align: center;
+                    font-weight: 600;
+                    -webkit-box-orient: vertical;
+                    -webkit-box-direction: normal;
+                    -ms-flex-direction: column;
+                    flex-direction: column
+                }
+
+                    .section-boxes .boxes-wrap .item .symbol span {
+         
+                    }
+
+                .marketState {
+                    grid-area: marketState;
+                    text-align: left;
+                    padding-top: 12px;
+                }
+
+                 .rValue {
+                    grid-area: rValue;
+                    text-align: right;
+                    padding-top: 12px;
+                }
+
+
+
+        .box-small-text {
+            font-size: 9px;
+            font-weight: 400;
+        }
+
+        .box-big-text {
+            font-size: 20px;
+        }
+
+
+        .section-trades {
+            display: grid;
+            grid-template-rows: 30px 30px 1fr 0;
+            max-height: 888px;
+            height: 100%;
+            grid-area: sectionTrades;
+        }
+
+            .section-trades .header {
+                position: relative;
+                border-radius: 11px 11px 0 0;
+                font-weight: 800;
+                color: white;
+            }
+
+            .section-trades .trades-wrap {
+                display: grid;
+                grid-template-columns: 1fr 30px 1fr 50px 0;
+                overflow-y: auto
+            }
+
+                .section-trades .trades-wrap::-webkit-scrollbar {
+                    background-color: #eaeaea;
+                    width: 10px
+                }
+
+                .section-info .info-wrap #tab1 .area1::-webkit-scrollbar-thumb,
+                .section-trades .trades-wrap::-webkit-scrollbar-thumb {
+                    background-color: #a6a6a6
+                }
+
+            .section-trades .trade-wrap_headers {
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr 50px;
+                row-gap: 2px;
+                color: #fff !important;
+                // background-color: #203764 !important;
+            }
+
+                .section-trades .trade-wrap_headers .trade-wrap_headers-period.active {
+                    display: -webkit-box !important;
+                    display: -ms-flexbox !important;
+                    display: flex !important;
+                    color: #5d9aeb;
+                    opacity: 1
+                }
+
+                .section-trades .trade-wrap_headers .trade-wrap_headers-day,
+                .section-trades .trade-wrap_headers .trade-wrap_headers-month,
+                .section-trades .trade-wrap_headers .trade-wrap_headers-week {
+                    cursor: pointer;
+                    color: white;
+                }
+
+                .section-trades .trade-wrap_headers .trade-wrap_headers-risk {
+                    display: -webkit-box;
+                    display: -ms-flexbox;
+                    display: flex;
+                    -webkit-box-pack: center;
+                    -ms-flex-pack: center;
+                    justify-content: center;
+                    -webkit-box-align: center;
+                    -ms-flex-align: center;
+                    align-items: center;
+                    font-weight: 600;
+                    color: white;
+                }
+
+                .section-trades .trade-wrap_headers .trade-wrap_headers-day,
+                .section-trades .trade-wrap_headers .trade-wrap_headers-month,
+                .section-trades .trade-wrap_headers .trade-wrap_headers-week {
+                    color: #fff;
+                    opacity: .2;
+                    display: -webkit-box;
+                    display: -ms-flexbox;
+                    display: flex;
+                    -webkit-box-pack: center;
+                    -ms-flex-pack: center;
+                    justify-content: center;
+                    -webkit-box-align: center;
+                    -ms-flex-align: center;
+                    align-items: center;
+                    font-weight: 600
+                }
+
+                .section-trades .trade-wrap_headers .trade-wrap_headers-risk {
+                    opacity: 1;
+                    color: #fff
+                }
+
+            .section-trades .trades-wrap .trades-wrap_rValue,
+            .section-trades .trades-wrap .trades-wrap_titles,
+            .section-trades .trades-wrap .trades-wrap_values {
+                display: grid;
+                grid-template-rows: repeat(25, 1fr) 0
+            }
+
+                .section-trades .trades-wrap .item,
+                .section-trades .trades-wrap .trades-wrap_rValue .itemR div {
+                    width: 100%;
+                    display: -webkit-box;
+                    display: -ms-flexbox;
+                    display: flex;
+                    -webkit-box-align: center;
+                    -ms-flex-align: center;
+                    align-items: center;
+                    color: #fff
+                }
+
+                .section-trades .trades-wrap .trades-wrap_rValue .itemR div {
+                    height: 100%;
+                    -webkit-box-pack: center;
+                    -ms-flex-pack: center;
+                    justify-content: center
+                }
+
+            .section-trades .trades-wrap .item {
+                background-color: #fff;
+                padding-left: 15px;
+                -webkit-box-pack: start;
+                -ms-flex-pack: start;
+                justify-content: flex-start;
+                font-size: 16px;
+                font-weight: 700;
+                border-top: 1px solid #000
+            }
+
+            .section-trades .trades-wrap .itemR {
+                border-top: 1px solid #000
+            }
+
+                .section-trades .trades-wrap .item:last-child,
+                .section-trades .trades-wrap .itemR:last-child {
+                    border-bottom: 1px solid #000
+                }
+
+            .section-trades .trades-wrap .trades-wrap_values .item {
+                padding-right: 15px;
+                -webkit-box-pack: end;
+                -ms-flex-pack: end;
+                justify-content: flex-end
+            }
+
+           /* .section-trades .trades-wrap_titles .item:nth-child(1) {
+                background: #74bab8;
+                color: #000
+            }
+
+            .section-trades .trades-wrap_titles .item:nth-child(2),
+            .section-trades .trades-wrap_titles .item:nth-child(3),
+            .section-trades .trades-wrap_titles .item:nth-child(5),
+            .section-trades .trades-wrap_titles .item:nth-child(6),
+            .section-trades .trades-wrap_titles .item:nth-child(8) {
+                background: #baa392;
+                color: #000
+            }
+
+            .section-trades .trades-wrap_titles .item:nth-child(4) {
+                background: red;
+                color: #000
+            }
+
+            .section-trades .trades-wrap_titles .item:nth-child(11),
+            .section-trades .trades-wrap_titles .item:nth-child(7),
+            .section-trades .trades-wrap_titles .item:nth-child(9) {
+                background: #e47c7c;
+                color: #000
+            }
+
+            .section-trades .trades-wrap_titles .item:nth-child(10) {
+                background: #f6a4b0;
+                color: #000
+            }
+
+            .section-trades .trades-wrap_titles .item:nth-child(12),
+            .section-trades .trades-wrap_titles .item:nth-child(14) {
+                background: #baa392;
+                color: #000
+            }
+
+            .section-trades .trades-wrap_titles .item:nth-child(13) {
+                background: #f6f387;
+                color: #000
+            }
+
+            .section-trades .trades-wrap_titles .item:nth-child(16) {
+                background-color: #b9a2e8;
+                color: #000
+            }
+
+            .section-trades .trades-wrap_titles .item:nth-child(15),
+            .section-trades .trades-wrap_titles .item:nth-child(17),
+            .section-trades .trades-wrap_titles .item:nth-child(19),
+            .section-trades .trades-wrap_titles .item:nth-child(22) {
+                background: #6872c2;
+                color: #000
+            }
+
+            .section-trades .trades-wrap_titles .item:nth-child(18),
+            .section-trades .trades-wrap_titles .item:nth-child(20),
+            .section-trades .trades-wrap_titles .item:nth-child(21),
+            .section-trades .trades-wrap_titles .item:nth-child(23),
+            .section-trades .trades-wrap_titles .item:nth-child(24) {
+                background: #a792ba;
+                color: #000
+            }
+
+            .section-trades .trades-wrap_titles .item:nth-child(25) {
+                background: #c268bf;
+                color: #000
+            }*/
+
+            .section-trades .trades-wrap .trades-wrap_risks {
+                text-align: center;
+                font-size: 10px;
+                color: #fff;
+                display: grid;
+                grid-template-rows: 10fr 5fr 0 2fr 8fr;
+                padding-bottom: 2px
+            }
+
+            .section-trades .trades-wrap_values .item {
+                color: #000
+            }
+
+        /*    .section-trades .trades-wrap .trades-wrap_risks .risks-item:nth-child(1) {
+                background: #57cd63
+            }
+
+            .section-trades .trades-wrap .trades-wrap_risks .risks-item:nth-child(2) {
+                background: #8cd1d1
+            }
+
+            .section-trades .trades-wrap .trades-wrap_risks .risks-item:nth-child(3) {
+                background: #a590b8;
+                color: #fff;
+                overflow: hidden;
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                -webkit-box-pack: center;
+                -ms-flex-pack: center;
+                justify-content: center;
+                -webkit-box-align: center;
+                -ms-flex-align: center;
+                align-items: center
+            }
+
+           .section-trades .trades-wrap .trades-wrap_risks .risks-item:nth-child(4) {
+                background: #f6f387
+            }
+
+            .section-trades .trades-wrap .trades-wrap_risks .risks-item:nth-child(5) {
+                background: #e47c7c
+            }*/
+
+        .section-info {
+            display: grid;
+            grid-template-rows: 30px 40px 1fr;
+            row-gap: 5px;
+            grid-area: sectionInfo;
+        }
+
+            .section-info .header,
+            .section-info .header .download,
+            .section-info .header .tab {
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                -webkit-box-align: center;
+                -ms-flex-align: center;
+                align-items: center
+            }
+
+                .section-info .header .tab a {
+                    background-color: #fff;
+                }
+
+            .section-info .header {
+                position: relative;
+                -ms-flex-pack: distribute;
+                display: grid;
+                grid-template-columns: minmax(auto,130px) minmax(auto,130px) minmax(auto,130px) minmax(auto,130px) minmax(auto,130px);
+                grid-gap: 0px;
+            }
+
+                .section-info .header .download,
+                .section-info .header .tab {
+                    height: 100%;
+                    -webkit-box-pack: center;
+                    -ms-flex-pack: center;
+                    justify-content: center;
+                    cursor: pointer;
+                    border: 1px solid #000;
+                    background-color: #fff;
+                }
+
+                    .section-info .header .download a,
+                    .section-info .header .tab a {
+                        padding: 5px 10px;
+                        text-decoration: none;
+                        color: #070707;
+                        font-weight: 600
+                    }
+
+                    .section-info .header .download a {
+                        border-radius: 5px;
+                        background-color: #fff;
+                        opacity: 1
+                    }
+
+                    .section-info .header .tab.active-tab a,
+                    .section-info .header .tab:hover a {
+                        color: #5d9aeb;
+                        opacity: 1
+                    }
+
+            .section-info .info-wrap {
+                max-height: 838px;
+                overflow-y: auto
+            }
+
+                .section-info .info-wrap .item {
+                    display: none;
+                    height: 100%;
+                    padding: 5px
+                }
+
+                .section-info .info-wrap .active {
+                    display: grid !important
+                }
+
+                .section-info .info-wrap #tab1 {
+                    grid-template-columns: repeat(4, 1fr);
+                    //grid-template-rows: 125px calc((100% - 100px)*.6) calc((100% - 100px)*.4);
+                    grid-template-rows: 125px auto 300px;
+                    grid-template-columns: 120px auto auto 120px;
+                    grid-template-areas: "area2 area2 area2 area2""area1 area1 area1 area1""area3 area4 area4 area5"
+                }
+
+                    .section-info .info-wrap #tab1 .area1 {
+                        grid-area: area1;
+                        overflow-y: auto;
+                        
+                        border-radius: 0 0 27px 27px;
+                        color: #fff;
+                    }
+
+                    .section-info .info-wrap #tab1 .area2 {
+                        grid-area: area2;
+                        color: #fff
+                    }
+
+                    .section-info .info-wrap #tab1 .area2,
+                    .section-info .info-wrap #tab2 .area5,
+                    .section-info .info-wrap #tab3 .area4 {
+                        
+                        border-radius: 27px 27px 0 0;
+                        display: -webkit-box;
+                        display: -ms-flexbox;
+                        display: flex;
+                        -webkit-box-orient: horizontal;
+                        -webkit-box-direction: normal;
+                        -ms-flex-direction: row;
+                        flex-direction: row;
+                        -webkit-box-align: center;
+                        -ms-flex-align: center;
+                        align-items: center;
+                        color: #fff
+                    }
+
+                        .section-info .info-wrap #tab1 .area2 div.trend-item,
+                        .section-info .info-wrap #tab2 .area5 div.trend-item,
+                        .section-info .info-wrap #tab3 .area4 div.trend-item {
+                            height: 100%;
+                            width: 100%;
+                            max-height: 100px;
+                            max-width: 100px;
+                            padding: 5px;
+                            border-radius: 0px;
+                            display: -webkit-box;
+                            display: -ms-flexbox;
+                            display: flex;
+                            -webkit-box-orient: vertical;
+                            -webkit-box-direction: normal;
+                            -ms-flex-direction: column;
+                            flex-direction: column;
+                            -ms-flex-pack: distribute;
+                            justify-content: space-around;
+                            -webkit-box-align: center;
+                            -ms-flex-align: center;
+                            align-items: center;
+                            color: #fff;
+                            font-size: 30px
+                        }
+
+                            .section-info .info-wrap #tab1 .area2 div.trend-item .trend-item_trend,
+                            .section-info .info-wrap #tab1 .area2 div.trend-item .trend-item_type,
+                            .section-info .info-wrap #tab2 .area5 div.trend-item .trend-item_trend,
+                            .section-info .info-wrap #tab2 .area5 div.trend-item .trend-item_type,
+                            .section-info .info-wrap #tab3 .area4 div.trend-item .trend-item_trend,
+                            .section-info .info-wrap #tab3 .area4 div.trend-item .trend-item_type {
+                                font-size: 10px;
+                                text-align: center
+                            }
+
+                        .section-info .info-wrap #tab1 .area2 div.symbol-info,
+                        .section-info .info-wrap #tab2 .area5 div.symbol-info,
+                        .section-info .info-wrap #tab3 .area4 div.symbol-info {
+                            color: #fff;
+                            font-size: 20px;
+                            margin-left: 15px;
+                            text-align: center;
+                            font-weight: 600
+                        }
+
+                        .section-info .info-wrap #tab1 .area2 div.trend-number,
+                        .section-info .info-wrap #tab2 .area5 div.trend-number,
+                        .section-info .info-wrap #tab3 .area4 div.trend-number {
+                            display: -webkit-box;
+                            display: -ms-flexbox;
+                            display: flex;
+                            -webkit-box-pack: center;
+                            -ms-flex-pack: center;
+                            justify-content: center;
+                            -webkit-box-align: center;
+                            -ms-flex-align: center;
+                            align-items: center;
+                            color: #fff;
+                            font-size: 18px;
+                            margin-left: 15px;
+                            text-align: center
+                        }
+
+                    .section-info .info-wrap #tab1 .area3 {
+                        padding-top: 40px;
+                        grid-area: area3
+                    }
+
+                    .section-info .info-wrap #tab1 .area5 {
+                        padding-top: 40px;
+                        grid-area: area5
+                    }
+
+                    .section-info .info-wrap #tab1 .area3 .header {
+                        display: -webkit-box;
+                        display: -ms-flexbox;
+                        display: flex;
+                        -webkit-box-pack: center;
+                        -ms-flex-pack: center;
+                        justify-content: center;
+                        margin-bottom: 5px;
+                        font-weight: 600;
+                        color: #fff;
+                    }
+
+                    .section-info .info-wrap #tab1 .area3 .graph {
+                        height: 100%;
+                        width: 100%;
+                        border-radius: 5px;
+                        height: calc(100% - 30px);
+                        background-size: contain;
+                        background-repeat: no-repeat;
+                        background-position: center center
+                    }
+
+                    .section-info .info-wrap #tab1 .area5 .graph {
+                        height: 100%;
+                        width: 100%;
+                        border-radius: 5px;
+                        height: calc(100% - 30px);
+                        background-size: contain;
+                        background-repeat: no-repeat;
+                        background-position: center center
+                    }
+
+                    .section-info .info-wrap #tab1 .area4 {
+                        padding-top: 15px;
+                        grid-area: area4
+                    }
+
+                        .section-info .info-wrap #tab1 .area4 .header {
+                            display: -webkit-box;
+                            display: -ms-flexbox;
+                            display: flex;
+                            -webkit-box-pack: center;
+                            -ms-flex-pack: center;
+                            justify-content: center;
+                            margin-bottom: 5px;
+                            font-weight: 600;
+                            color: #fff;
+                        }
+
+                        .section-info .info-wrap #tab1 .area4 .graph {
+                            height: 100%;
+                            width: 100%;
+                            border-radius: 5px;
+                            height: calc(100% - 30px);
+                            background-size: contain;
+                            background-repeat: no-repeat;
+                            background-position: top;
+                        }
+
+                .section-info .info-wrap #tab2 {
+                    grid-template-columns: repeat(4, 1fr);
+                    grid-template-rows: 125px calc((100% - 125px)*.4) calc((100% - 125px)*.15) calc((100% - 125px)*.45);
+                    grid-template-areas: "area5 area5 area5 area5""area1 area1 area1 area1""mmarea mmarea mmarea mmarea""area2 area4 area4 area4"
+                }
+
+                    .section-info .info-wrap #tab2 .area1 {
+                        grid-area: area1;
+                        overflow-y: auto;
+     
+                        color: #fff;
+                    }
+
+                        .section-info .info-wrap #tab2 .area1::-webkit-scrollbar {
+                            background-color: #eaeaea;
+                            width: 5px
+                        }
+
+                        .section-info .info-wrap #tab2 .area1::-webkit-scrollbar-thumb {
+                            background-color: #a6a6a6
+                        }
+
+                    .section-info .info-wrap #tab2 .mmarea {
+                        grid-area: mmarea;
+                        display: grid;
+                        grid-template-columns: repeat(6, 1fr);
+                        row-gap: 3px;
+                        -webkit-column-gap: 3px;
+                        -moz-column-gap: 3px;
+                        column-gap: 3px;
+                        padding: 5px 0;
+                        color: #fff;
+                    }
+
+                        .section-info .info-wrap #tab2 .mmarea h3 {
+                            margin: 0;
+                            -ms-flex-item-align: center;
+                            align-self: center;
+                            text-align: center
+                        }
+
+                        .section-info .info-wrap #tab2 .area2,
+                        .section-info .info-wrap #tab2 .area3,
+                        .section-info .info-wrap #tab2 .mmarea .mmarea_item {
+                            -webkit-box-align: center;
+                            -ms-flex-align: center;
+                            align-items: center;
+                            -webkit-box-orient: vertical;
+                            -webkit-box-direction: normal;
+                            -ms-flex-direction: column;
+                            flex-direction: column
+                        }
+
+                        .section-info .info-wrap #tab2 .mmarea .mmarea_item {
+                            display: -webkit-box;
+                            display: -ms-flexbox;
+                            display: flex
+                        }
+
+                            .section-info .info-wrap #tab2 .mmarea .mmarea_item .metric,
+                            .section-info .info-wrap #tab2 .mmarea .mmarea_item .name {
+                                padding: 0 5px;
+                                width: 100%;
+                                height: 50%;
+                                display: -webkit-box;
+                                display: -ms-flexbox;
+                                display: flex;
+                                -webkit-box-align: center;
+                                -ms-flex-align: center;
+                                align-items: center;
+                                -webkit-box-pack: center;
+                                -ms-flex-pack: center;
+                                justify-content: center
+                            }
+
+                            .section-info .info-wrap #tab2 .mmarea .mmarea_item .metric {
+                                background: #fff;
+                                border-radius: 12px
+                            }
+
+                    .section-info .info-wrap #tab2 .area2,
+                    .section-info .info-wrap #tab2 .area3 {
+                        -webkit-box-pack: center;
+                        -ms-flex-pack: center;
+                        justify-content: center
+                    }
+
+                    .section-info .info-wrap #tab2 .area2 {
+                        grid-area: area2;
+                        display: -webkit-box;
+                        display: -ms-flexbox;
+                        display: flex
+                    }
+
+                        .section-info .info-wrap #tab2 .area2 .header {
+                            display: -webkit-box;
+                            display: -ms-flexbox;
+                            display: flex;
+                            margin-bottom: 5px;
+                            font-weight: 600;
+                            color: #fff;
+                        }
+
+                        .section-info .info-wrap #tab2 .area2 .graph {
+                            height: 100%;
+                            width: 100%;
+                            border-radius: 5px;
+                            height: calc(100% - 30px)
+                        }
+
+                            .section-info .info-wrap #tab2 .area2 .graph canvas,
+                            .section-info .info-wrap #tab2 .area3 .graph canvas {
+                                height: calc(100% - 30px) !important
+                            }
+
+                    .section-info .info-wrap #tab2 .area3 {
+                        grid-area: area3;
+                        display: none
+                    }
+
+                        .section-info .info-wrap #tab2 .area3 .header {
+                            display: -webkit-box;
+                            display: -ms-flexbox;
+                            display: flex;
+                            -webkit-box-pack: center;
+                            -ms-flex-pack: center;
+                            justify-content: center;
+                            margin-bottom: 5px;
+                            font-weight: 600;
+                            color: #fff;
+                        }
+
+                        .section-info .info-wrap #tab2 .area3 .graph {
+                            height: 100%;
+                            width: 100%;
+                            border-radius: 5px;
+                            height: calc(100% - 30px)
+                        }
+
+                    .section-info .info-wrap #tab2 .area4 {
+                        grid-area: area4;
+                        padding-left: 5px
+                    }
+
+                        .section-info .info-wrap #tab2 .area4 .header {
+                            display: -webkit-box;
+                            display: -ms-flexbox;
+                            display: flex;
+                            -webkit-box-pack: center;
+                            -ms-flex-pack: center;
+                            justify-content: center;
+                            margin-bottom: 5px;
+                            font-weight: 600;
+                            color: #fff;
+                        }
+
+                        .section-info .info-wrap #tab2 .area4 .graph {
+                            height: 100%;
+                            width: 100%;
+                            border-radius: 5px;
+                            height: calc(100% - 30px);
+                            background-size: contain;
+                            background-repeat: no-repeat;
+                            background-position: center center
+                        }
+
+                    .section-info .info-wrap #tab2 .area5 {
+                        grid-area: area5
+                    }
+
+                .section-info .info-wrap #tab3 {
+                    grid-template-columns: repeat(2, 1fr);
+                    //grid-template-rows: 125px calc((100% - 125px)*.4) calc((100% - 125px)*.6);
+                    grid-template-rows: 125px auto 300px;
+                    grid-template-areas: "area4 area4""area1 area1""area2 area3"
+                }
+
+                    .section-info .info-wrap #tab3 .area1 {
+                        grid-area: area1;
+                        overflow-y: auto;
+                        
+                        color: #fff;
+                    
+                    }
+
+                        .section-info .info-wrap #tab3 .area1::-webkit-scrollbar {
+                            background-color: #eaeaea;
+                            width: 5px
+                        }
+
+                        .section-info .info-wrap #tab3 .area1::-webkit-scrollbar-thumb {
+                            background-color: #a6a6a6
+                        }
+
+                    .section-info .info-wrap #tab3 .area3 {
+                        padding: 10px 5px 0;
+                        font-weight: 600;
+                        grid-area: area3
+                    }
+
+                        .section-info .info-wrap #tab3 .area3 .header {
+                            display: -webkit-box;
+                            display: -ms-flexbox;
+                            display: flex;
+                            -webkit-box-pack: center;
+                            -ms-flex-pack: center;
+                            justify-content: center;
+                            margin-bottom: 5px;
+                            color: #fff;
+                        }
+
+                        .section-info .info-wrap #tab3 .area3 .graph {
+                            height: 100%;
+                            width: 100%;
+                            border-radius: 5px;
+                            height: calc(100% - 30px);
+                            background-size: contain;
+                            background-repeat: no-repeat;
+                            background-position: top;
+                        }
+
+                    .section-info .info-wrap #tab3 .area2 {
+                        padding: 10px 5px 0;
+                        grid-area: area2;
+                        font-weight: 600
+                    }
+
+                        .section-info .info-wrap #tab3 .area2 .header {
+                            display: -webkit-box;
+                            display: -ms-flexbox;
+                            display: flex;
+                            -webkit-box-pack: center;
+                            -ms-flex-pack: center;
+                            justify-content: center;
+                            margin-bottom: 5px;
+                            color: #fff
+                        }
+
+                        .section-info .info-wrap #tab3 .area2 .graph {
+                            height: 100%;
+                            width: 100%;
+                            border-radius: 5px;
+                            height: calc(100% - 30px);
+                            background-size: contain;
+                            background-repeat: no-repeat;
+                            background-position: top;
+                        }
+
+                    .section-info .info-wrap #tab3 .area4 {
+                        grid-area: area4
+                    }
+
+                .section-info .info-wrap #tab4 {
+                    grid-template-columns: 45% repeat(2, calc(55%/2));
+                    grid-template-rows: auto 1fr;
+                    row-gap: 5px;
+                    -webkit-column-gap: 5px;
+                    -moz-column-gap: 5px;
+                    column-gap: 5px;
+                    grid-template-areas: "area2 area2 area2""area1 . .  "
+                }
+
+                    .section-info .info-wrap #tab4 .area1 {
+                        grid-area: area1;
+                        max-height: 100%;
+                        color: #fff;
+                    }
+
+                    .section-info .info-wrap #tab4 .area2 {
+                        grid-area: area2;
+                        -ms-flex-pack: distribute;
+                        justify-content: space-around;
+                        padding-right: 20px
+                    }
+
+                        .section-info .info-wrap #tab4 .area2 .time-phase {
+                            text-transform: uppercase;
+                            font-weight: 700
+                        }
+
+                        .section-info .info-wrap #tab4 .area2 .time-phase__value {
+                            height: 20px;
+                            margin-bottom: 5px
+                        }
+
+                    .section-info .info-wrap #tab4 .area1 .graph {
+                        height: 100%;
+                        width: 100%;
+                        display: -webkit-box;
+                        display: -ms-flexbox;
+                        display: flex;
+                        -webkit-box-align: end;
+                        -ms-flex-align: end;
+                        align-items: flex-end
+                    }
+
+                    .imagesBlock,
+                    .section-date,
+                    .section-info .info-wrap #tab4 .area2 {
+                        display: -webkit-box;
+                        display: -ms-flexbox;
+                        display: flex
+                    }
+
+        .section-date {
+            background: #fff;
+            grid-area: sectionDate;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center
+        }
+
+            .section-date p {
+                margin: 0;
+                font-weight: 900
+            }
+
+        .imagesBlock {
+            width: 100%;
+            justify-content: center;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap
+        }
+
+        .imagesBlock-item {
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center center;
+            width: 90px;
+            height: 80px;
+            position: relative
+        }
+
+            .imagesBlock-item p {
+                position: absolute;
+                bottom: -5px;
+                left: 50%;
+                -webkit-transform: translateX(-50%);
+                transform: translateX(-50%);
+                font-weight: 600
+            }
+
+        .user-bar {
+            width: 100%;
+            max-width: 1920px !important;
+            
+            -webkit-box-orient: horizontal;
+            -webkit-box-direction: reverse;
+            -ms-flex-direction: row-reverse;
+            flex-direction: row-reverse
+        }
+
+        .user-bar__info {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-pack: end;
+            -ms-flex-pack: end;
+            justify-content: flex-end
+        }
+
+        .user-bar__logout {
+            padding: 2px 10px;
+            background-color: #f5f5f5;
+            text-transform: uppercase;
+            border: 0;
+            font-family: sans-serif;
+            font-weight: 400;
+            font-size: 20px;
+            border-radius: 10px
+        }
+
+            .user-bar__logout:hover {
+                color: #5d9aeb;
+                opacity: .9;
+                border-radius: 0
+            }
+
+        /* @media screen and (max-width:1400px) {
+            .section-trades .trades-wrap .item {
+                font-size: 13px;
+                padding-left: 8px
+            }
+        }
+
+        @media screen and (max-width:1200px) {
+            .section-info .header {
+                -webkit-box-pack: justify;
+                -ms-flex-pack: justify;
+                justify-content: space-between
+            }
+
+                .section-info .header .download a,
+                .section-info .header .tab a {
+                    font-size: 14px;
+                    padding: 5px 3px
+                }
+
+            .section-info .info-wrap #tab1 .area2 div.symbol-info,
+            .section-info .info-wrap #tab1 .area2 div.trend-number,
+            .section-info .info-wrap #tab2 .area5 div.symbol-info,
+            .section-info .info-wrap #tab2 .area5 div.trend-number,
+            .section-info .info-wrap #tab3 .area4 div.symbol-info,
+            .section-info .info-wrap #tab3 .area4 div.trend-number {
+                font-size: 15px
+            }
+
+            .section-info .info-wrap #tab1,
+            .section-info .info-wrap #tab3 {
+                grid-template-rows: 120px 100% 250px 250px;
+                grid-template-areas: "area4 area4""area1 area1""area2 area2""area3 area3"
+            }
+
+                .section-info .info-wrap #tab3 .area2 .graph,
+                .section-info .info-wrap #tab3 .area3 .graph {
+                    height: calc(100% - 20px)
+                }
+
+            .section-info .info-wrap #tab1 {
+                grid-template-areas: "area2 area2 area2 area2""area1 area1 area1 area1""area3 area4 area4 area5"
+            }
+
+            .section-info .info-wrap #tab2 {
+                grid-template-rows: 120px 100% 55px 250px 250px;
+                grid-template-areas: "area5 area5 area5 area5""area1 area1 area1 area1""mmarea mmarea mmarea mmarea""area2 area2 area3 area3""area4 area4 area4 area4"
+            }
+
+                .section-info .info-wrap #tab2 .area3 .graph canvas {
+                    max-height: 100%
+                }
+
+            .section-boxes .header .filter .filter-item {
+                font-size: 14px;
+            }
+
+            .section-boxes .header .filter ul li,
+            .section-boxes .header .filter:first-child {
+                padding-left: 5px
+            }
+
+            .section-boxes .header .filter.filter-date:after {
+                display: none
+            }
+
+            .section-boxes .header .filter.filter-date ul {
+                width: 100%
+            }
+
+            .section-boxes .header {
+                grid-template-columns: 2.5fr 1.7fr 2.5fr 0;
+                -webkit-column-gap: 3px;
+                -moz-column-gap: 3px;
+                column-gap: 3px
+            }
+
+            .section-info .info-wrap {
+                -ms-overflow-y: auto;
+                overflow-y: auto
+            }
+        }*/
+
+
+        .rounded-corners {
+            border-radius: 6px;
+        }
+
+        .purple-bk-lighter {
+            background-color: #203764 !important;
+        }
+
+
+        .purple-bk {
+            // background-color: #203764;
+            background-color: #203764;
+        }
+
+        .filter-item {
+            padding: 10px;
+        }
+
+        .main-container {
+            padding: 50px 50px 100px 50px;
+        }
+
+        .section-boxes, .section-trades {
+            background-color: #203764;
+            height: 98% !important;
+        }
+
+        .section-info {
+            background-color: #203764;
+        }
+
+
+
+        .imagesBlock, .user-bar {
+            color: white;
+        }
+
+        .page-jss {
+            padding-bottom: 100px;
+        }
+
+        .futures-select {
+            display: flex;
+            float: right;
+        }
+
+        .main-logo {
+           
+        }
+
+            .main-logo img {
+                height: 60px;
+                border-radius: 12px;
+                padding-left: 0 10px 0 10px;
+            }
+
+
+        .section-boxes .header-top {
+            position: relative;
+            border-radius: 11px 11px 0 0;
+            font-weight: 800;
+            color: white;
+            text-align: center;
+        }
+
+        .section-info .header {
+        }
+
+
+            .section-info .header div[class^="col"] {
+                padding-left: 2px;
+                padding-right: 2px;
+            }
+
+        .trades-wrap_rValue {
+            background-color: white;
+        }
+
+        .metric {
+            color: black;
+        }
+
+
+        .area1 p {
+            font-size: 18px;
+        }
+
+
+        .section-trades
+        {
+           
+        }
+
+        .symbolInfoTitleSymbol {
+            font-size: 35px;
+        }
+
+
+        .symbolInfoTitleCurrency {
+            font-size: 15px;
+        }
+
+
+        .risks-item {
+            display: table;
+        }
+
+            .risks-item > span {
+                display: table-cell;
+                vertical-align: middle;
+                font-weight:600;
+            }
+
+
+
+    </style>
+</head>
+
+<body data-ms-content="grid-page" class="purple-bk">
+    <div class="container-fluid main-container">
+        <div class="page-jss-loading"></div>
+
+        <header class="user-bar">
+                <a href="https://www.jsstradetool.com/" class="main-logo"><img src="/static/assets/imgs/JSServices-Logo.png" alt="logo" ></a>
+            <div class="futures-select">
+                <p><button>futures</button></p>
+            </div>
+
+            <!-- <a href="/dashboard/">View Dashboard</a>-->
+            <!-- <div class="user-bar__info">
+      <button
+        ms-profile="true"
+        data-ms-modal="profile"
+        class="user-bar__logout"
+      >
+        Profile
+      </button>
+    </div> -->
+        </header>
+
+        <div class="page-jss purple-bk">
+             <!--<div class="row">-->
+   
+        <!--<div class="col-12 col-sm-12 col-md-12 col-lg-3 col-xl-3 col-xxl-4">-->
+                <div class="section-boxes">
+                    <div class="header-top">
+                        PlayBook
+                    </div>
+                    <div class="header">
+                        <div class="item filter filter-date" style="background-color: #fff;height: 36px;">
+                            <ul></ul>
+                        </div>
+                        <div class="item filter filter-indicator" style="background-color: #fff;height: 36px;">
+                            <ul></ul>
+                        </div>
+                        <div class="item filter filter-symbol" style="background-color: #fff;height: 36px;">
+                            <ul></ul>
+                        </div>
+                        <div class="refresh-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21 21">
+                                <defs>
+                                    <style>
+                                        .cls-1 {
+                                            fill: none;
+                                        }
+
+                                        .cls-2 {
+                                            fill: #535FE1;
+                                        }
+                                    </style>
+                                </defs>
+                                <g id="Group_1" data-name="Group 1" transform="translate(-496 -337)">
+                                    <rect id="Rectangle_5" data-name="Rectangle 5" class="cls-1" width="21" height="21"
+                                          transform="translate(496 337)" />
+                                    <path id="refresh_copy" data-name="refresh copy" class="cls-2"
+                                          d="M17.5,11.8a1.05,1.05,0,0,0-.9-.5,1.341,1.341,0,0,0-1.5,1.1,6.206,6.206,0,0,1-6,5.2H9A6.207,6.207,0,0,1,8.6,5.2v2a.367.367,0,0,0,.1.3c.1.3.5.3.7.2l4.4-3.3c.1,0,.1-.1.2-.2.1-.3.1-.6-.2-.7L9.4.1c0-.1-.1-.1-.2-.1a.56.56,0,0,0-.6.5v2A8.821,8.821,0,0,0,.1,10.4a8.893,8.893,0,0,0,7.8,9.9h0c.3,0,.7.1,1,.1a8.919,8.919,0,0,0,8.8-7.5A1.311,1.311,0,0,0,17.5,11.8Z"
+                                          transform="translate(497.667 337.3)" />
+                                </g>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="boxes-wrap purple-bk-lighter"></div>
+                </div>
+       
+                    <!--<div class="col-12 col-sm-12 col-md-12 col-lg-3 col-xl-3 col-xxl-3">-->
+                    <div class="section-trades purple-bk">
+                        <div class="header">Price Map</div>
+                        <div class="trade-wrap_headers purple-bk-lighter">
+                            <div class="trade-wrap_headers-period trade-wrap_headers-day active">
+                                D
+                            </div>
+                            <div class="trade-wrap_headers-period trade-wrap_headers-week">W</div>
+                            <div class="trade-wrap_headers-period trade-wrap_headers-month">
+                                M
+                            </div>
+                            <div class="trade-wrap_headers-risk">RISK</div>
+                        </div>
+                        <div class="trades-wrap purple-bk-lighter">
+                            <div class="trades-wrap_titles">
+                                <div class="item plus-c-plus-var">UT4 +c</div>
+                                <div class="item UL08">**</div>
+                                <div class="item UL07">*</div>
+                                <div class="item UT3">UT3</div>
+                                <div class="item UL05">**</div>
+                                <div class="item UL04">*</div>
+                                <div class="item UT2">UT2</div>
+                                <div class="item UL02">*</div>
+                                <div class="item UT1">UT1</div>
+                                <div class="item CRX-plus">CRX+</div>
+                                <div class="item UP">UP</div>
+                                <div class="item CR-plus">CR+</div>
+                                <div class="item DIR">DIR</div>
+                                <div class="item CR-minus">CR-</div>
+                                <div class="item DP">DP</div>
+                                <div class="item CRX-minus">CRX-</div>
+                                <div class="item DT1">DT1</div>
+                                <div class="item DL02">*</div>
+                                <div class="item DT2">DT2</div>
+                                <div class="item DL04">*</div>
+                                <div class="item DL05">**</div>
+                                <div class="item DT3">DT3</div>
+                                <div class="item DL07">*</div>
+                                <div class="item DL08">**</div>
+                                <div class="item minus-c-plus-var">DT4 -c</div>
+                            </div>
+                            <div class="trades-wrap_rValue"></div>
+                            <div class="trades-wrap_values"></div>
+                            <div class="trades-wrap_risks">
+                                <div class="risks-item risk-off"><span>RISK OFF</span></div>
+                                <div class="risks-item less-risk"><span>LESS RISK</span></div>
+                                <div class="risks-item pivotal"><span>PIVOTAL</span></div>
+                                <div class="risks-item at-risk"><span>@ RISK</span></div>
+                                <div class="risks-item risk-on"><span>RISK ON</span></div>
+                            </div>
+                        </div>
+                    </div>
+                   
+           
+       
+                    <!--<div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-5">-->
+                    <div class="section-info">
+                        <div class="header-top">
+                            &nbsp;
+                        </div>
+                        <div class="header">
+
+                            <div class="tab active-tab"><a href="tab1">STATE</a></div>
+
+                            <div class="tab"><a href="tab2">STRUCTURE</a></div>
+
+                            <div class="tab"><a href="tab3">STRATEGY</a></div>
+
+                            <div class="tab"><a href="tab3">OPTIONS</a></div>
+
+                            <div class="tab"><a href="tab3">DASHBOARD</a></div>
+
+                            <!-- <div class="col-2" >
+                        <div class="tab" style="display: none"><a href="tab4">DISCOVERY</a></div>
+                    </div> -->
+                            <!-- <div class="tab"><a href="tab5">Resources</a></div> -->
+                        </div>
+                        <div class="info-wrap">
+                            <div id="tab1" class="item active">
+                                <div class="area area1">
+                                    <p></p>
+                                </div>
+                                <div class="area area2">
+                                    <div class="trend-item">
+                                        <div class="trend-item_trend"></div>
+                                        <div class="trend-item_mark"></div>
+                                        <div class="trend-item_type"></div>
+                                    </div>
+                                    <div style="margin: 0 auto">
+                                        <div class="symbol-info"></div>
+                                        <div class="trend-number"></div>
+                                    </div>
+                                </div>
+                                <div class="area area3">
+                                    <!-- <div class="header">Market Attributes</div>-->
+                                    <div class="graph"></div>
+                                </div>
+                                <div class="area area4">
+                                    <div class="header">Market Expectations</div>
+                                    <div class="graph"></div>
+                                </div>
+                                <div class="area area5">
+                                    <!-- <div class="header">Market Attributes</div>-->
+                                    <div class="graph"></div>
+                                </div>
+                            </div>
+                            <div id="tab2" class="item">
+                                <div class="area area1">
+                                    <h2>lorem</h2>
+                                    <p>
+                                        Lorem ipsum ligula eu, leo nulla, a orci: magna: odio: nulla
+                                        metus in leo odio — ornare, porta malesuada mauris bibendum.
+                                        Sapien — eros porta nec elementum duis — pharetra risus sem
+                                        nulla — eu sem, rutrum justo. Enim mattis in bibendum lectus,
+                                        sem nec integer urna
+                                    </p>
+                                </div>
+                                <div class="area mmarea">
+                                    <h3>Market Metrics</h3>
+                                    <div class="mmarea_item mmarea_item-apmd">
+                                        <div class="name">APMD</div>
+                                        <div class="metric"></div>
+                                    </div>
+                                    <div class="mmarea_item mmarea_item-apmdticks">
+                                        <div class="name">APMDT</div>
+                                        <div class="metric"></div>
+                                    </div>
+                                    <div class="mmarea_item mmarea_item-var">
+                                        <div class="name">VAR</div>
+                                        <div class="metric"></div>
+                                    </div>
+                                    <div class="mmarea_item mmarea_item-ad">
+                                        <div class="name">AD</div>
+                                        <div class="metric"></div>
+                                    </div>
+                                    <div class="mmarea_item mmarea_item-msd">
+                                        <div class="name">MSD</div>
+                                        <div class="metric"></div>
+                                    </div>
+                                </div>
+                                <div class="area area2">
+                                    <div class="header">APMD</div>
+                                    <div class="graph">
+                                        <canvas id="volumeGraph" style="height: 211px; width: 116px"></canvas>
+                                        <!-- <h4>State Indicators</h4> -->
+                                        <!-- <div class="market-state_item">
+                                  <div class="market-state_item-title">MCS</div>
+                                  <div class="market-state_item-value" data-value="mcs"></div>
+                                </div>
+                                <div class="market-state_item">
+                                  <div class="market-state_item-title">MCV</div>
+                                  <div class="market-state_item-value" data-value="mcv"></div>
+                                </div>
+                                <div class="market-state_item">
+                                  <div class="market-state_item-title">MCC</div>
+                                  <div class="market-state_item-value" data-value="mcc"></div>
+                                </div>
+                                <h4>Technical Profile</h4>
+                                <div class="market-state_item">
+                                  <div class="market-state_item-title">MAC</div>
+                                  <div class="market-state_item-value" data-value="mac"></div>
+                                </div>
+                                <div class="market-state_item">
+                                  <div class="market-state_item-title">DMI</div>
+                                  <div class="market-state_item-value" data-value="dmi"></div>
+                                </div>
+                                <div class="market-state_item">
+                                  <div class="market-state_item-title">ADX</div>
+                                  <div class="market-state_item-value" data-value="adx"></div>
+                                </div>
+                                <div class="market-state_item">
+                                  <div class="market-state_item-title">RSI</div>
+                                  <div class="market-state_item-value" data-value="rsi"></div>
+                                </div>
+                                <div class="market-state_item">
+                                  <div class="market-state_item-title">SSTOC</div>
+                                  <div class="market-state_item-value" data-value="sst"></div>
+                                </div>
+                                <div class="market-state_item">
+                                  <div class="market-state_item-title">DC</div>
+                                  <div class="market-state_item-value" data-value="dc"></div>
+                                </div> -->
+                                    </div>
+                                </div>
+                                <div class="area area3">
+                                    <div class="header">APMD</div>
+                                    <div class="graph">
+                                        <canvas id="apmdGraph" style="height: 211px; width: 116px"></canvas>
+                                    </div>
+                                </div>
+                                <div class="area area4">
+                                    <div class="header">Market Structure Bias</div>
+                                    <div class="graph"></div>
+                                </div>
+
+                                <div class="area area5">
+                                    <div class="trend-item">
+                                        <div class="trend-item_trend"></div>
+                                        <div class="trend-item_mark"></div>
+                                        <div class="trend-item_type"></div>
+                                    </div>
+                                    <div style="margin: 0 auto">
+                                        <div class="symbol-info"></div>
+                                        <div class="trend-number"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="tab3" class="item">
+                                <div class="area area1">
+                                    <h2>lorem</h2>
+                                    <p>
+                                        Lorem ipsum ligula eu, leo nulla, a orci: magna: odio: nulla
+                                        metus in leo odio — ornare, porta malesuada mauris bibendum.
+                                        Sapien — eros porta nec elementum duis — pharetra risus sem
+                                        nulla — eu sem, rutrum justo. Enim mattis in bibendum lectus,
+                                        sem nec integer urna
+                                    </p>
+                                </div>
+                                <div class="area area2">
+                                    <div class="header">Optimal Strategy</div>
+                                    <div class="graph"></div>
+                                </div>
+                                <div class="area area3">
+                                    <div class="header">Hedge Strategy</div>
+                                    <div class="graph"></div>
+                                </div>
+                                <div class="area area4">
+                                    <div class="trend-item">
+                                        <div class="trend-item_trend"></div>
+                                        <div class="trend-item_mark"></div>
+                                        <div class="trend-item_type"></div>
+                                    </div>
+                                    <div style="margin: 0 auto">
+                                        <div class="symbol-info"></div>
+                                        <div class="trend-number"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="tab4" class="item">
+                                <div class="area area1">
+                                    <div class="graph">
+                                        <canvas id="discoveryGraph" height="528" style="height: 528px; width: 240px"></canvas>
+                                    </div>
+                                </div>
+                                <div class="area area2">
+                                    <div class="time-phase" id="dailyrst">
+                                        <div class="time-phase__value"></div>
+                                        <div class="time-phase__name">daily rst</div>
+                                    </div>
+                                    <div class="time-phase" id="daily24h">
+                                        <div class="time-phase__value"></div>
+                                        <div class="time-phase__name">daily 24hr</div>
+                                    </div>
+                                    <div class="time-phase" id="weekly">
+                                        <div class="time-phase__value"></div>
+                                        <div class="time-phase__name">weekly</div>
+                                    </div>
+                                    <div class="time-phase" id="monthly">
+                                        <div class="time-phase__value"></div>
+                                        <div class="time-phase__name">monthly</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="tab5" class="item">
+                                <div class="download">
+                                    <a href="http://159.89.118.206/get_pm_file?filename=PriceMap-Futures-All.csv" target="_blank">DOWNLOAD</a>
+                                </div>
+                            </div>
+                        </div>
+                    
+                
+            </div>
+            <div class="section-date">
+                <p></p>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script type="module" src="{% static 'assets-grid-jss/script.js' %}"></script>
+        <script type="module" src="{% static 'assets-grid-jss/dataUpdates.js' %}"></script>
+        
+        <script type="module" src="../static/assets-grid-jss/script.js"></script>
+    </div>
+</body>
+
+</html>

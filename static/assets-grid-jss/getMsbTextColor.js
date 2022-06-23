@@ -1,0 +1,31 @@
+export default function (posState) {
+  const textColor = {
+    NEU: "rgba(255,255,255)",
+    NPS: "rgba(0,0,255)",
+    NPT: "rgba(0,255,0)",
+    NPE: "rgba(255,255,0)",
+    NNS: "rgba(255,102,153)",
+    NNT: "rgba(255,153,0)",
+    NNE: "rgba(255,255,0)",
+    UPC: "rgba(0,0,255)",
+    UPE: "rgba(255,255,0)",
+    UPPE: "rgba(255,255,0)",
+    UPAE: "rgba(255,255,0)",
+    UPD: "rgba(244,176,131)",
+    UPT: "rgba(255,255,255)",
+    UPP: "rgba(0,255,0)",
+    UPA: "rgba(0,0,255)",
+    DNA: "rgba(255,0,0)",
+    DNN: "rgba(255,192,0)",
+    DNT: "rgba(255,255,255)",
+    DND: "rgba(255,153,51)",
+    DNAE: "rgba(255,255,0)",
+    DNNE: "rgba(255,255,0)",
+    DNE: "rgba(255,255,0)",
+    DNC: "rgba(255,0,0)",
+    PE: "rgba(0,0,255)",
+    NE: "rgba(255,0,0)",
+    NEUT: "rgba(255,255,255)",
+  };
+  return textColor[posState] || "white";
+}
