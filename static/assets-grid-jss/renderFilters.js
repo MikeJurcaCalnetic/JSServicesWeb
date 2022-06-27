@@ -32,14 +32,20 @@ export default function renderFilters(filterArrDates, dataByDate) {
     dataByDate.forEach((item) => {
       const filter = item.name.split(".")[0];
 
+        
+
+
       if (!filterArrIndicators.includes(filter))
         filterArrIndicators.push(filter);
     });
   }
   filterArrDates
     .sort((a, b) => (a < b ? 1 : -1))
-    .forEach((filterArrItem) => {
-      let displayDate = new Date(filterArrItem + " ");
+      .forEach((filterArrItem) => {
+
+      let displayDate = new Date(filterArrItem.replace("-", "/").replace("-", "/") + "  12:00:00");
+
+
       let thisDay = displayDate.getDay();
       let thisDate = displayDate.getDate();
 
@@ -62,9 +68,11 @@ export default function renderFilters(filterArrDates, dataByDate) {
             displayDate.setDate(thisDate + 1);
             break;
         }
-      }
-      const displayDateString = `${displayDate.getFullYear()}-${displayDate.getFullMonth()}-${displayDate.getFullDate()}`;
+        }
 
+        
+        const displayDateString = `${displayDate.getFullYear()}-${displayDate.getFullMonth()}-${displayDate.getFullDate()}`;
+        
       let filterItem = document.createElement("li");
       filterItem.className = "filter-item";
       filterItem.innerText = displayDateString;

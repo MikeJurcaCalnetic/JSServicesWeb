@@ -49,28 +49,59 @@ export default function renderPriceMap(e, arr) {
   );
 
   priceMapArr.forEach((item) => {
-    currentPriceMap[0][item];
+      currentPriceMap[0][item];
+      console.log(item);
     renderPriceMapBlock(
       currentPriceMap[0][item],
       currentPriceMap[0]["r"],
-      currentPriceMap[0]["name"]
+        currentPriceMap[0]["name"],
+      item
     );
   });
 
-  function renderPriceMapBlock(text, rValue, symbol) {
+    function getCssClass(item) {
+        var css = "";
+        switch (item) {
+            case "up":
+                css = "UP";
+                break;
+            case "dir":
+                css = "DIR";
+                break;
+            case "dp":
+                css = "DP";
+                break;
+        }
+        return css;
+    }
+
+    function renderPriceMapBlock(text, rValue, symbol, itemWord) {
+  
     let item = document.createElement("div");
     let itemR = document.createElement("div");
     let symbolFullName = symbol.split(".").slice(0, -1).join(" ");
+
+
+        var cssCLass = getCssClass(itemWord);
+
+        if (cssCLass != "") {
+            item.classList.add(cssCLass);
+            itemR.classList.add(cssCLass);
+        }
+
+        item.classList.add("item");
+        itemR.classList.add("itemR");
+
     if ((text.includes(".") && +text == +rValue) || text == rValue) {
       let blockR = document.createElement("div");
       let block = document.createElement("div");
-      item.className = "item";
-      itemR.className = "itemR";
       blockR.innerText = "R";
-      blockR.style.background = "#60d934";
+      blockR.classList.add("r-block");
       block.innerText = text;
       itemR.append(blockR);
-      item.append(block);
+        item.append(block);
+        item.classList.add("r-block");
+        itemR.classList.add("r-block");
       tradesWrapR.append(itemR);
       tradesWrap.append(item);
 
@@ -80,11 +111,10 @@ export default function renderPriceMap(e, arr) {
 
       return;
     }
-    item.className = "item";
     item.innerText = text;
-    itemR.className = "itemR";
     tradesWrapR.append(itemR);
-    tradesWrap.append(item);
+      tradesWrap.append(item);
+     
   }
 }
 export function setClosestSymbolDateWeek(currentDate, fullName, arr) {

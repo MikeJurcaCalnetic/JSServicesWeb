@@ -23,7 +23,7 @@ export default function renderBlockInformationOnClick(e, arr) {
   const currentObject = curentObjectDateArr.filter(
     (item) => item.date == blockData.date
   );
-  console.log(currentObject);
+ 
   if (blockData.currentDate)
     currentObject[0].currentDate = blockData.currentDate;
 
@@ -188,7 +188,7 @@ export default function renderBlockInformationOnClick(e, arr) {
        
             // SymbolDescription(itemName)
             symbolObject.coinSymbol + " " + symbolObject.currency;
-        item.innerHTML = `<span class="symbolInfoTitleSymbol">${symbolObject.coinSymbol}</span><br/><span class="symbolInfoTitleCurrency">${symbolObject.currency}</span>`;
+        item.innerHTML = `<span class="symbolInfoTitleSmall">${currentObject[0].name.split(".")[0]}</span><span class="symbolInfoTitleSymbol">${symbolObject.coinSymbol}</span> <span class="symbolInfoTitleSmall">${symbolObject.currency}</span>`;
     }
   });
 
@@ -202,7 +202,7 @@ export default function renderBlockInformationOnClick(e, arr) {
     marketAttributesGraph2.innerHTML = "";
 
     marketExpectationsGraph.style.backgroundImage = `url('/static/assets/imgs/playbook/MSB_${trendtypeData.code}.png')`;
-
+    
   marketAttributesGraph1.append(getMarketAttributesByCode(trendtypeData.code, 1));
     marketAttributesGraph2.append(getMarketAttributesByCode(trendtypeData.code, 2));
 

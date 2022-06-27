@@ -220,22 +220,22 @@
         }
 
         .risk-off {
-            color: #00F !important;
+            color: #000 !important;
             background: #0F0 !important;
         }
 
         .less-risk {
-            color: #00F !important;
+            color: #000 !important;
             background: #0FF !important;
         }
 
         .at-risk {
-            color: #F00 !important;
+            color: #000 !important;
             background: #FF0 !important;
         }
 
         .risk-on {
-            color: #FF0 !important;
+            color: #000 !important;
             background: #F00 !important;
         }
 
@@ -252,6 +252,12 @@
             -webkit-box-align: center;
             -ms-flex-align: center;
             align-items: center
+        }
+
+        .r-block {
+            background-color: #60d934 !important;
+            color: black !important;
+            font-weight: 600;
         }
 
         /**END section-trades colors*/
@@ -365,7 +371,7 @@
             row-gap: 5px;
             -webkit-column-gap: 10px;
             -moz-column-gap: 10px;
-            column-gap: 50px;
+            column-gap: 35px;
             padding: 5px;
             min-height: 100px;
             background-color: #fff;
@@ -571,7 +577,7 @@
                     position: relative;
                     width: calc(100%/7 - 5px);
                     height: 100px;
-                    min-width: 90px;
+                    min-width: 65px;
                     cursor: pointer
                 }
 
@@ -1014,7 +1020,7 @@
                 .section-info .info-wrap #tab1 {
                     grid-template-columns: repeat(4, 1fr);
                     //grid-template-rows: 125px calc((100% - 100px)*.6) calc((100% - 100px)*.4);
-                    grid-template-rows: 125px auto 300px;
+                    grid-template-rows: 125px auto 350px;
                     grid-template-columns: 120px auto auto 120px;
                     grid-template-areas: "area2 area2 area2 area2""area1 area1 area1 area1""area3 area4 area4 area5"
                 }
@@ -1114,12 +1120,12 @@
                         }
 
                     .section-info .info-wrap #tab1 .area3 {
-                        padding-top: 40px;
+                        padding-top: 50px;
                         grid-area: area3
                     }
 
                     .section-info .info-wrap #tab1 .area5 {
-                        padding-top: 40px;
+                        padding-top: 50px;
                         grid-area: area5
                     }
 
@@ -1176,7 +1182,7 @@
                             height: 100%;
                             width: 100%;
                             border-radius: 5px;
-                            height: calc(100% - 30px);
+                            height: calc(100% - 10px);
                             background-size: contain;
                             background-repeat: no-repeat;
                             background-position: top;
@@ -1513,14 +1519,16 @@
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center center;
-            width: 90px;
-            height: 80px;
+            /**width: 90px;
+            height: 80px;**/
+            width: 100%;
+            height: 100px;
             position: relative
         }
 
             .imagesBlock-item p {
                 position: absolute;
-                bottom: -5px;
+                top: -10px;
                 left: 50%;
                 -webkit-transform: translateX(-50%);
                 transform: translateX(-50%);
@@ -1671,7 +1679,7 @@
 
         .section-boxes, .section-trades {
             background-color: #203764;
-            height: 98% !important;
+           
         }
 
         .section-info {
@@ -1745,8 +1753,9 @@
         }
 
 
-        .symbolInfoTitleCurrency {
+        .symbolInfoTitleSmall {
             font-size: 15px;
+            padding: 0 15px 0 15px;
         }
 
 
@@ -1814,7 +1823,7 @@
                                         }
 
                                         .cls-2 {
-                                            fill: #535FE1;
+                                            fill: #FE6021;
                                         }
                                     </style>
                                 </defs>
@@ -1899,9 +1908,9 @@
 
                             <div class="tab"><a href="tab3">STRATEGY</a></div>
 
-                            <div class="tab"><a href="tab3">OPTIONS</a></div>
+                            <div class="tab"><a href="tab6">OPTIONS</a></div>
 
-                            <div class="tab"><a href="tab3">DASHBOARD</a></div>
+                            <div class="tab"><a href="tab6">DASHBOARD</a></div>
 
                             <!-- <div class="col-2" >
                         <div class="tab" style="display: none"><a href="tab4">DISCOVERY</a></div>
@@ -1977,42 +1986,42 @@
                                         <canvas id="volumeGraph" style="height: 211px; width: 116px"></canvas>
                                         <!-- <h4>State Indicators</h4> -->
                                         <!-- <div class="market-state_item">
-                                  <div class="market-state_item-title">MCS</div>
-                                  <div class="market-state_item-value" data-value="mcs"></div>
-                                </div>
-                                <div class="market-state_item">
-                                  <div class="market-state_item-title">MCV</div>
-                                  <div class="market-state_item-value" data-value="mcv"></div>
-                                </div>
-                                <div class="market-state_item">
-                                  <div class="market-state_item-title">MCC</div>
-                                  <div class="market-state_item-value" data-value="mcc"></div>
-                                </div>
-                                <h4>Technical Profile</h4>
-                                <div class="market-state_item">
-                                  <div class="market-state_item-title">MAC</div>
-                                  <div class="market-state_item-value" data-value="mac"></div>
-                                </div>
-                                <div class="market-state_item">
-                                  <div class="market-state_item-title">DMI</div>
-                                  <div class="market-state_item-value" data-value="dmi"></div>
-                                </div>
-                                <div class="market-state_item">
-                                  <div class="market-state_item-title">ADX</div>
-                                  <div class="market-state_item-value" data-value="adx"></div>
-                                </div>
-                                <div class="market-state_item">
-                                  <div class="market-state_item-title">RSI</div>
-                                  <div class="market-state_item-value" data-value="rsi"></div>
-                                </div>
-                                <div class="market-state_item">
-                                  <div class="market-state_item-title">SSTOC</div>
-                                  <div class="market-state_item-value" data-value="sst"></div>
-                                </div>
-                                <div class="market-state_item">
-                                  <div class="market-state_item-title">DC</div>
-                                  <div class="market-state_item-value" data-value="dc"></div>
-                                </div> -->
+                  <div class="market-state_item-title">MCS</div>
+                  <div class="market-state_item-value" data-value="mcs"></div>
+                </div>
+                <div class="market-state_item">
+                  <div class="market-state_item-title">MCV</div>
+                  <div class="market-state_item-value" data-value="mcv"></div>
+                </div>
+                <div class="market-state_item">
+                  <div class="market-state_item-title">MCC</div>
+                  <div class="market-state_item-value" data-value="mcc"></div>
+                </div>
+                <h4>Technical Profile</h4>
+                <div class="market-state_item">
+                  <div class="market-state_item-title">MAC</div>
+                  <div class="market-state_item-value" data-value="mac"></div>
+                </div>
+                <div class="market-state_item">
+                  <div class="market-state_item-title">DMI</div>
+                  <div class="market-state_item-value" data-value="dmi"></div>
+                </div>
+                <div class="market-state_item">
+                  <div class="market-state_item-title">ADX</div>
+                  <div class="market-state_item-value" data-value="adx"></div>
+                </div>
+                <div class="market-state_item">
+                  <div class="market-state_item-title">RSI</div>
+                  <div class="market-state_item-value" data-value="rsi"></div>
+                </div>
+                <div class="market-state_item">
+                  <div class="market-state_item-title">SSTOC</div>
+                  <div class="market-state_item-value" data-value="sst"></div>
+                </div>
+                <div class="market-state_item">
+                  <div class="market-state_item-title">DC</div>
+                  <div class="market-state_item-value" data-value="dc"></div>
+                </div> -->
                                     </div>
                                 </div>
                                 <div class="area area3">
@@ -2097,6 +2106,11 @@
                             <div id="tab5" class="item">
                                 <div class="download">
                                     <a href="http://159.89.118.206/get_pm_file?filename=PriceMap-Futures-All.csv" target="_blank">DOWNLOAD</a>
+                                </div>
+                            </div>
+                            <div id="tab6" class="item">
+                                <div style="color:white; padding: 50px; font-size: 20px; font-weight:600;">
+                                    Coming soon
                                 </div>
                             </div>
                         </div>

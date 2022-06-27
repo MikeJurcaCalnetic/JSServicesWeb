@@ -34,8 +34,9 @@ export default async function FetchData(tableName = "binance", reload = false) {
 
     arrData = await fetch(url + tableName)
       .then((r) => r.text())
-      .then((r) => JSON.parse(r))
+        .then((r) => JSON.parse(r.replace(/GDAX/g, "CoinBase")))
       .then((r) => r);
+
 
     localStorage.setItem("savedValues", tableName);
 
@@ -54,11 +55,22 @@ export async function getDataByDate(date) {
   const tableName = getDataMode();
     const url = `https://6tlrxvd6d9.execute-api.ap-south-1.amazonaws.com/live/getlist?getdata=${tableName}&date=${date}`;
 
-  try {
+    try {
+
     const arrData = await fetch(url)
       .then((r) => r.text())
-      .then((r) => JSON.parse(r))
-      .then((r) => r.data);
+        .then((r) => JSON.parse(r.replace(/GDAX/g, "CoinBase")))
+          .then((r) => r.data);
+
+    //const arrData = await fetch(url)
+    //  .then((r) => r.text())
+    //  .then((r) => JSON.parse(r))
+    //      .then((r) => r.data);
+
+
+
+      console.log(arrData);
+
     return await arrData;
   } catch (error) {
     console.log(error);
