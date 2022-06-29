@@ -96,15 +96,23 @@ export default async function renderBlocks(blockGroup, dataByDate = false) {
       let symbol = document.createElement("div");
       symbol.className = "symbol";
       symbol.style.color = textColor;
-      if (getDataMode() === "crypto") symbol.style.fontSize = "12px";
+      //if (getDataMode() === "crypto") symbol.style.fontSize = "12px";
         const splitedName = blockItem["name"].split(".");
 
       var symbolObject = getSymbol(splitedName[1]);
 
-      symbol.innerHTML =
-        splitedName.length == 2
-          ? splitedName[0]
-          : `<span class="box-small-text">${splitedName[0]}</span><span class="box-big-text">${symbolObject.coinSymbol}</span><span class="box-small-text">${symbolObject.currency}</span>`;
+        symbol.innerHTML =
+            splitedName.length == 2
+            ? splitedName[0].length >= 6 ? `<span class="box-bigger-text">${splitedName[0]}</span>` : `<span class="box-big-text">${splitedName[0]}</span>`
+                : `<span class="box-small-text">${splitedName[0]}</span><span class="box-big-text">${symbolObject.coinSymbol}</span><span class="box-small-text">${symbolObject.currency}</span>`;
+
+        //if (getDataMode() === "futures" && symbolObject.coinSymbol.length >= 6) {
+        //    symbol.innerHTML =
+        //        splitedName.length == 2
+        //        ? `<span class="box-bigger-text">${splitedName[0]}</span>`
+        //            : `<span class="box-bigger-text">${symbolObject.coinSymbol}</span>`;
+            
+        //}
 
       let marketState = document.createElement("div");
         marketState.classList.add(

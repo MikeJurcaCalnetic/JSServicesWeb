@@ -175,10 +175,19 @@ export default function renderBlockInformationOnClick(e, arr) {
 
   [symbolInfo, symbolInfoTab2, symbolInfoTab3].forEach((item) => {
     if (getDataMode() === "futures") {
-      const itemName = currentObject[0].name.split(".")[0];
-      item.innerText = `${itemName} ${SymbolDescription(
-        itemName
-      )} ${contactDateText}`;
+        const itemName = currentObject[0].name.split(".")[0];
+
+
+        if (itemName.indexOf(SymbolDescription(itemName)) > -1 && contactDateText.indexOf(itemName) > -1) {
+            item.innerHTML = `<span class="symbolInfoTitleSymbolFutures"> ${SymbolDescription(itemName)}</span>`;
+        }
+        else {
+            item.innerHTML = `<span class="symbolInfoTitleSmallFutures">${itemName} -</span><span class="symbolInfoTitleSymbolFutures"> ${SymbolDescription(itemName)}</span> <span class="symbolInfoTitleSmallFutures">${contactDateText}</span>`;
+        }
+
+
+        
+
     } else {
 
         var symbolObject = getSymbol(currentObject[0].name.split(".")[1]);

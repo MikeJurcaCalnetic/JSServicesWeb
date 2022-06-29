@@ -16,7 +16,7 @@
         
         function getSymbol(name) {
 
-            const AllSymbols = ["BTC", "ETH", "USDT", "USDC", "BNB", "BUSD", "ADA", "XRP", "SOL", "DOGE", "DOT", "DAI", "TRX", "LEO", "SHIB", "WBTC", "AVAX", "MATIC", "UNI", "LTC", "FTT", "LINK", "CRO", "XLM", "NEAR", "ALGO", "BCH", "ATOM", "ETC", "XMR", "VET", "MANA", "FLOW", "HBAR", "ICP", "EGLD", "FIL", "THETA", "APE", "XTZ", "HNT", "SAND", "TUSD", "BSV", "AXS", "KCS", "ZEC", "USDP", "EOS", "MKR", "AAVE", "MIOTA", "HT", "USDN", "GRT", "BTT", "KLAY", "XEC", "USDD", "OKB", "WAVES", "FTM", "QNT", "NEO", "PAXG", "RUNE", "BAT", "CHZ", "ZIL", "LRC", "STX", "DASH", "GMT", "CAKE", "KSM", "FEI", "ENJ", "CELO", "CRV", "GALA", "AMP", "1INCH", "NEXO", "XDC", "HOT", "XEM", "SNX", "KAVA", "MINA", "DCR", "GT", "ONE", "AR", "KDA", "XYM", "QTUM", "GNO", "BTG", "COMP", "BORA", "IOST", "CVX", "AUDIO", "TFUEL", "ROSE", "OMG", "ICX", "STORJ", "TWT", "IOTX", "KNC", "ANKR", "ZRX", "GLM", "SRM", "RVN", "CEL", "JST", "SXP", "ONT", "MXC", "SC", "WOO", "LPT", "BTRST", "YFI", "GLMR", "WAXP", "SKL", "IMX", "BAL", "GUSD", "CHSB", "ENS", "ZEN", "NFT", "HIVE", "POLY", "XCH", "UMA", "LDO", "SCRT", "SUSHI", "DGB", "PLA", "ELON", "CSPR", "RSR", "MX", "LSK", "KEEP", "EPS", "BNT", "RNDR", "RENBTC", "VGX", "ORBS", "PEOPLE", "NU", "PUNDIX", "CKB", "MED", "OCEAN", "ONG", "CEEK", "ACA", "CHR", "REV", "WXT", "SUSD", "CELR", "XPRT", "REN", "XNO", "WIN", "POWR", "FLUX", "ILV", "CFX", "VLX", "ARDR", "SNT", "RLY", "C98", "COTI", "DYDX", "OGN", "MTL", "REP", "TEL", "DAO", "CVC", "DENT", "CTSI", "WRX", "SYS", "STEEM", "DAG", "USTC", "FXS"];
+            const AllSymbols = ["XBT","BTC", "ETH", "USDT", "USDC", "BNB", "BUSD", "ADA", "XRP", "SOL", "DOGE", "DOT", "DAI", "TRX", "LEO", "SHIB", "WBTC", "AVAX", "MATIC", "UNI", "LTC", "FTT", "LINK", "CRO", "XLM", "NEAR", "ALGO", "BCH", "ATOM", "ETC", "XMR", "VET", "MANA", "FLOW", "HBAR", "ICP", "EGLD", "FIL", "THETA", "APE", "XTZ", "HNT", "SAND", "TUSD", "BSV", "AXS", "KCS", "ZEC", "USDP", "EOS", "MKR", "AAVE", "MIOTA", "HT", "USDN", "GRT", "BTT", "KLAY", "XEC", "USDD", "OKB", "WAVES", "FTM", "QNT", "NEO", "PAXG", "RUNE", "BAT", "CHZ", "ZIL", "LRC", "STX", "DASH", "GMT", "CAKE", "KSM", "FEI", "ENJ", "CELO", "CRV", "GALA", "AMP", "1INCH", "NEXO", "XDC", "HOT", "XEM", "SNX", "KAVA", "MINA", "DCR", "GT", "ONE", "AR", "KDA", "XYM", "QTUM", "GNO", "BTG", "COMP", "BORA", "IOST", "CVX", "AUDIO", "TFUEL", "ROSE", "OMG", "ICX", "STORJ", "TWT", "IOTX", "KNC", "ANKR", "ZRX", "GLM", "SRM", "RVN", "CEL", "JST", "SXP", "ONT", "MXC", "SC", "WOO", "LPT", "BTRST", "YFI", "GLMR", "WAXP", "SKL", "IMX", "BAL", "GUSD", "CHSB", "ENS", "ZEN", "NFT", "HIVE", "POLY", "XCH", "UMA", "LDO", "SCRT", "SUSHI", "DGB", "PLA", "ELON", "CSPR", "RSR", "MX", "LSK", "KEEP", "EPS", "BNT", "RNDR", "RENBTC", "VGX", "ORBS", "PEOPLE", "NU", "PUNDIX", "CKB", "MED", "OCEAN", "ONG", "CEEK", "ACA", "CHR", "REV", "WXT", "SUSD", "CELR", "XPRT", "REN", "XNO", "WIN", "POWR", "FLUX", "ILV", "CFX", "VLX", "ARDR", "SNT", "RLY", "C98", "COTI", "DYDX", "OGN", "MTL", "REP", "TEL", "DAO", "CVC", "DENT", "CTSI", "WRX", "SYS", "STEEM", "DAG", "USTC", "FXS"];
 
             var coinSymbol = name;
             var currency = "";
@@ -441,7 +441,7 @@
             .section-boxes .header {
                 position: relative;
                 display: grid;
-                grid-template-columns: minmax(auto,160px) 2fr 2fr 25px;
+                grid-template-columns: minmax(auto,160px) 2fr 2fr 2fr 25px;
                 -webkit-column-gap: 7px;
                 -moz-column-gap: 7px;
                 column-gap: 7px;
@@ -684,6 +684,10 @@
             font-size: 20px;
         }
 
+        .box-bigger-text {
+            font-size: 14px;
+        }
+
 
         .section-trades {
             display: grid;
@@ -903,7 +907,7 @@
                 color: #fff;
                 display: grid;
                 grid-template-rows: 10fr 5fr 0 2fr 8fr;
-                padding-bottom: 2px
+                
             }
 
             .section-trades .trades-wrap_values .item {
@@ -1029,7 +1033,7 @@
                         grid-area: area1;
                         overflow-y: auto;
                         
-                        border-radius: 0 0 27px 27px;
+                       
                         color: #fff;
                     }
 
@@ -1752,10 +1756,19 @@
             font-size: 35px;
         }
 
+        .symbolInfoTitleSymbolFutures {
+            font-size: 30px;
+        }
+
 
         .symbolInfoTitleSmall {
             font-size: 15px;
             padding: 0 15px 0 15px;
+        }
+
+        .symbolInfoTitleSmallFutures {
+            font-size: 20px;
+           
         }
 
 
@@ -1769,7 +1782,21 @@
                 font-weight:600;
             }
 
+        #futures-select-dropdown {
+            width: 100%;
+            height: 100%;
+            border: 1px solid #000;
+            border-radius: 5px;
+            font-weight: 600;
+        }
 
+
+
+
+
+        option:hover {
+            background: #EFEFEF;
+        }
 
     </style>
 </head>
@@ -1813,6 +1840,12 @@
                         </div>
                         <div class="item filter filter-symbol" style="background-color: #fff;height: 36px;">
                             <ul></ul>
+                        </div>
+                        <div class="" style="height: 36px;">
+                            <select class="dropdown-select" name="futures-select-dropdown" id="futures-select-dropdown" selected="binance" >
+                                <option value="binance">Crypto</option>
+                                <option value="futures">Futures</option>
+                            </select>
                         </div>
                         <div class="refresh-button">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21 21">

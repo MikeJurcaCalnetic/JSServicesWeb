@@ -50,7 +50,7 @@ export default function renderPriceMap(e, arr) {
 
   priceMapArr.forEach((item) => {
       currentPriceMap[0][item];
-      console.log(item);
+      
     renderPriceMapBlock(
       currentPriceMap[0][item],
       currentPriceMap[0]["r"],

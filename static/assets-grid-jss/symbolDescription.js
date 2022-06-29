@@ -144,5 +144,6 @@ export default function SymbolDescription(symbol) {
     "BINANCE.XRPUSD": "BINANCE XRPUSD",
   };
 
-  return descriptions[symbol] ? "- " + descriptions[symbol] : "";
+  //return descriptions[symbol] ? "- " + descriptions[symbol] : "";
+    return descriptions[symbol];
 }
