@@ -1792,6 +1792,26 @@
             font-weight: 600;
         }
 
+        .dropdown-select-date {
+            width: 80%;
+            height: 100%;
+            font-weight: 600;
+            border: 0;
+        }
+
+            .dropdown-select-date:focus {
+                outline: 0;
+                box-shadow: 0 ;
+            }
+
+        .date-select-dropdown-container {
+            padding-left: 3px;
+            border: 1px solid #000;
+            background-color: #FFF;
+            border-radius: 5px;
+            white-space: nowrap;
+            overflow: hidden;
+        }
 
 
 
@@ -1846,8 +1866,9 @@
                             -->
 
 
-                        <div class="" style="height: 36px;">
-                            <select class="dropdown-select" name="date-select-dropdown" id="date-select-dropdown">
+                        <div class="date-select-dropdown-container" style="height: 36px;">
+                            <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M19.1667 2.875H20.125C21.7101 2.875 23 4.16492 23 5.75V20.125C23 21.7101 21.7101 23 20.125 23H2.875C1.28992 23 0 21.7101 0 20.125V5.75C0 4.16492 1.28992 2.875 2.875 2.875H3.83327V0.958275C3.83327 0.42939 4.26266 0 4.79173 0H5.75C6.27906 0 6.70827 0.42939 6.70827 0.958275V2.875H16.2917V0.958275C16.2917 0.42939 16.7209 0 17.25 0H18.2083C18.7373 0 19.1667 0.42939 19.1667 0.958275V2.875ZM20.125 21.0833C20.653 21.0833 21.0833 20.653 21.0833 20.125V9.6217H1.91673V20.125C1.91673 20.653 2.34699 21.0833 2.875 21.0833H20.125Z" fill="black" /></svg>
+                            <select class="dropdown-select-date" name="date-select-dropdown" id="date-select-dropdown">
                             </select>
                         </div>
 
