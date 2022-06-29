@@ -10,11 +10,17 @@ import Structure from "/static/assets-grid-jss/structure.js";
 import getMarketAttributesByCode from "/static/assets-grid-jss/marketAtributes.js";
 import Strategy from "/static/assets-grid-jss/strategy.js";
 import timePhases from "/static/assets-grid-jss/timePhases.js";
+import { getDataByDate } from "/static/assets-grid-jss/dataFetch.js";
+
+export default async function renderBlockInformationOnClick(e) {
 
 
+   // var arr = await getDataByDate(document.getElementById("date-select-dropdown").value);
+    var arr = JSON.parse(localStorage.getItem("arr"));
 
-export default function renderBlockInformationOnClick(e, arr) {
-  const blockData = e.currentTarget.dataset;
+  const blockData = e.target.dataset;
+
+
 
   const curentObjectDateArr = arr.filter(
     (item) => item.name == blockData.fullName
@@ -23,7 +29,8 @@ export default function renderBlockInformationOnClick(e, arr) {
   const currentObject = curentObjectDateArr.filter(
     (item) => item.date == blockData.date
   );
- 
+
+
   if (blockData.currentDate)
     currentObject[0].currentDate = blockData.currentDate;
 

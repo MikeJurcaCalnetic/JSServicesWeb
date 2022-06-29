@@ -1369,8 +1369,8 @@ function renderBlocks(blockGroup, arr){
             item.classList.remove('active_cell')
         })
         e.currentTarget.classList.add('active_cell')    	
-        renderBlockInformationOnClick(e,arr);
-      	renderPriceMap(e, arr);
+        await renderBlockInformationOnClick(e);
+      	await renderPriceMap(e);
         setTradeHeadersValues(e,arr);
       	setSymbolFilter(e);
       	
@@ -1402,8 +1402,8 @@ function renderBlocks(blockGroup, arr){
       }
       if(currentFilterActiveItem(item) !== item.getAttribute('value') && item.dataset.filterPull == 'symbol' && !item.classList.contains('active')){
 
-        renderBlockInformationOnClick(e, arr)
-        renderPriceMap(e, arr)
+        await renderBlockInformationOnClick(e)
+        await renderPriceMap(e)
         document.querySelectorAll('.page-jss .section-boxes .boxes-wrap .item').forEach( boxItem => {
             boxItem.classList.remove('active_cell')
             if(item.dataset.fullName === boxItem.dataset.fullName) boxItem.classList.add('active_cell')
@@ -1860,7 +1860,7 @@ function getMarketActibutesByCode(code, part){
 
     return imagesBlock
 }
-function renderBlockInformationOnClick(e,arr){
+function await renderBlockInformationOnClick(e){
 
   const blockData = e.currentTarget.dataset
   const curentObjectDateArr = arr.filter(item => item.name == blockData.fullName);
@@ -2120,12 +2120,12 @@ function setTradeHeadersValues(e,arr){
      if(e.currentTarget.classList.contains('active')) return
      timePeriod.forEach(item => item.classList.remove('active'));
      item.classList.add('active');
-     renderBlockInformationOnClick(e,arr);
-     renderPriceMap(e, arr);   
+     await renderBlockInformationOnClick(e);
+     await renderPriceMap(e);   
     })
   })
 }
-function renderPriceMap(e, arr){
+function await renderPriceMap(e){
 
 	const thisBlock = e.currentTarget;
 	const [trendtype, symbol, marketState,rValue] = thisBlock.childNodes;

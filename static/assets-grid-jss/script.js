@@ -827,8 +827,8 @@ function setTradeHeadersValues(e, arr) {
       if (e.currentTarget.classList.contains("active")) return;
       timePeriod.forEach((item) => item.classList.remove("active"));
       item.classList.add("active");
-      renderBlockInformationOnClick(e, arr);
-      renderPriceMap(e, arr);
+      //await renderBlockInformationOnClick(e);
+      //await renderPriceMap(e);
     });
   });
 }

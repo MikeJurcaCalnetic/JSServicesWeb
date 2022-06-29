@@ -4,3 +4,5 @@
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
 venv
+/.vs/JSServicesWeb/config/applicationhost.config
+/.vs/JSServicesWeb/v16/.suo

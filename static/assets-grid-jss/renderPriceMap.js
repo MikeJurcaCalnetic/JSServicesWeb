@@ -1,5 +1,6 @@
 import { getColorBlockRRisk } from "/static/assets-grid-jss/colorBlockValues.js";
 import { getDataMode } from "/static/assets-grid-jss/status.js";
+import { getDataByDate } from "/static/assets-grid-jss/dataFetch.js";
 
 const tradesWrap = document.querySelector(".trades-wrap .trades-wrap_values");
 const tradesWrapR = document.querySelector(".trades-wrap .trades-wrap_rValue");
@@ -7,8 +8,12 @@ const tradesWrapRisk = document.querySelector(
   ".trades-wrap .trades-wrap_risks"
 );
 
-export default function renderPriceMap(e, arr) {
-  const thisBlock = e.currentTarget;
+export default async function renderPriceMap(e) {
+    //var arr = await getDataByDate(document.getElementById("date-select-dropdown").value);
+
+    var arr = JSON.parse(localStorage.getItem("arr"));
+
+  const thisBlock = e.target;
   const priceMapArr = [
     "ut4",
     "ul08",

@@ -23,7 +23,11 @@ export default async function renderBlocks(blockGroup, dataByDate = false) {
     arr = dataByDate;
   } else {
     arr = await getDataByDate(blockGroup);
-  }
+    }
+
+    localStorage.setItem("arr", JSON.stringify(arr));
+
+
   if (await arr) {
     let blockGroupArr = arr
       .filter((item) => {
@@ -41,15 +45,9 @@ export default async function renderBlocks(blockGroup, dataByDate = false) {
 
     const boxWrap = document.querySelector(".boxes-wrap");
     let thisDateObj = new Date(blockGroup);
-    const filterBlockSymbols = document.querySelector(".filter-symbol ul");
-    const filterBlockIndicators = document.querySelectorAll(
-      ".filter-indicator ul .filter-item"
-    );
-    filterBlockSymbols.innerHTML = "";
-    filterBlockIndicators.forEach((item) => {
-      item.classList.remove("active");
-      filterBlockIndicators[0].classList.add("active");
-    });
+    const filterBlockSymbols = document.getElementById("symbol-select-dropdown");;
+      const filterBlockIndicators = document.getElementById("indicator-select-dropdown");
+  
 
     while (boxWrap.firstChild) {
       boxWrap.removeChild(boxWrap.lastChild);
@@ -98,21 +96,16 @@ export default async function renderBlocks(blockGroup, dataByDate = false) {
       symbol.style.color = textColor;
       //if (getDataMode() === "crypto") symbol.style.fontSize = "12px";
         const splitedName = blockItem["name"].split(".");
-
+        item.classList.add(blockItem["name"].replace(".", "_").replace(".", "_"));
       var symbolObject = getSymbol(splitedName[1]);
 
+        /* (splitedName.length == 2) == futures and anything else is crypto */
         symbol.innerHTML =
             splitedName.length == 2
             ? splitedName[0].length >= 6 ? `<span class="box-bigger-text">${splitedName[0]}</span>` : `<span class="box-big-text">${splitedName[0]}</span>`
                 : `<span class="box-small-text">${splitedName[0]}</span><span class="box-big-text">${symbolObject.coinSymbol}</span><span class="box-small-text">${symbolObject.currency}</span>`;
 
-        //if (getDataMode() === "futures" && symbolObject.coinSymbol.length >= 6) {
-        //    symbol.innerHTML =
-        //        splitedName.length == 2
-        //        ? `<span class="box-bigger-text">${splitedName[0]}</span>`
-        //            : `<span class="box-bigger-text">${symbolObject.coinSymbol}</span>`;
-            
-        //}
+ 
 
       let marketState = document.createElement("div");
         marketState.classList.add(
@@ -137,7 +130,7 @@ export default async function renderBlocks(blockGroup, dataByDate = false) {
       itemWrap.addEventListener("click", function (e) {
         e.currentTarget.children[0].click();
       });
-      item.addEventListener("click", function (e) {
+      item.addEventListener("click", async (e) => {
         document.querySelectorAll(".filter").forEach((item) => {
           item.classList.remove("show");
         });
@@ -146,11 +139,12 @@ export default async function renderBlocks(blockGroup, dataByDate = false) {
           .forEach((item) => {
             item.classList.remove("active_cell");
           });
-        e.currentTarget.classList.add("active_cell");
-        renderBlockInformationOnClick(e, arr);
-        renderPriceMap(e, arr);
-        setTradeHeadersValues(e, arr);
-        setSymbolFilter(e);
+          e.currentTarget.classList.add("active_cell");
+        await renderBlockInformationOnClick(e);
+        await renderPriceMap(e);
+          setTradeHeadersValues(e, arr);
+          
+        setSymbolFilter(e.target.classList[1]);
       });
 
       if (blockGroupArr[0] == blockItem) item.click();
@@ -158,7 +152,7 @@ export default async function renderBlocks(blockGroup, dataByDate = false) {
   }
 }
 export function setTradeHeadersValues(e, arr) {
-  const blockData = e.currentTarget.dataset;
+  const blockData = e.target.dataset;
   const timePeriod = document.querySelectorAll(
     ".page-jss .section-trades .trade-wrap_headers .trade-wrap_headers-period"
   );
@@ -204,7 +198,7 @@ export function setTradeHeadersValues(e, arr) {
       timePeriod.forEach((item) => item.classList.remove("active"));
       item.classList.add("active");
 
-      renderBlockInformationOnClick(e, currentDate);
+     // renderBlockInformationOnClick(e, currentDate);
       renderPriceMap(e, currentDate);
     });
   });

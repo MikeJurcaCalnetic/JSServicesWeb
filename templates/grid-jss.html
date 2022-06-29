@@ -13,7 +13,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
     <script>
 
-        
+      
+
+
         function getSymbol(name) {
 
             const AllSymbols = ["XBT","BTC", "ETH", "USDT", "USDC", "BNB", "BUSD", "ADA", "XRP", "SOL", "DOGE", "DOT", "DAI", "TRX", "LEO", "SHIB", "WBTC", "AVAX", "MATIC", "UNI", "LTC", "FTT", "LINK", "CRO", "XLM", "NEAR", "ALGO", "BCH", "ATOM", "ETC", "XMR", "VET", "MANA", "FLOW", "HBAR", "ICP", "EGLD", "FIL", "THETA", "APE", "XTZ", "HNT", "SAND", "TUSD", "BSV", "AXS", "KCS", "ZEC", "USDP", "EOS", "MKR", "AAVE", "MIOTA", "HT", "USDN", "GRT", "BTT", "KLAY", "XEC", "USDD", "OKB", "WAVES", "FTM", "QNT", "NEO", "PAXG", "RUNE", "BAT", "CHZ", "ZIL", "LRC", "STX", "DASH", "GMT", "CAKE", "KSM", "FEI", "ENJ", "CELO", "CRV", "GALA", "AMP", "1INCH", "NEXO", "XDC", "HOT", "XEM", "SNX", "KAVA", "MINA", "DCR", "GT", "ONE", "AR", "KDA", "XYM", "QTUM", "GNO", "BTG", "COMP", "BORA", "IOST", "CVX", "AUDIO", "TFUEL", "ROSE", "OMG", "ICX", "STORJ", "TWT", "IOTX", "KNC", "ANKR", "ZRX", "GLM", "SRM", "RVN", "CEL", "JST", "SXP", "ONT", "MXC", "SC", "WOO", "LPT", "BTRST", "YFI", "GLMR", "WAXP", "SKL", "IMX", "BAL", "GUSD", "CHSB", "ENS", "ZEN", "NFT", "HIVE", "POLY", "XCH", "UMA", "LDO", "SCRT", "SUSHI", "DGB", "PLA", "ELON", "CSPR", "RSR", "MX", "LSK", "KEEP", "EPS", "BNT", "RNDR", "RENBTC", "VGX", "ORBS", "PEOPLE", "NU", "PUNDIX", "CKB", "MED", "OCEAN", "ONG", "CEEK", "ACA", "CHR", "REV", "WXT", "SUSD", "CELR", "XPRT", "REN", "XNO", "WIN", "POWR", "FLUX", "ILV", "CFX", "VLX", "ARDR", "SNT", "RLY", "C98", "COTI", "DYDX", "OGN", "MTL", "REP", "TEL", "DAO", "CVC", "DENT", "CTSI", "WRX", "SYS", "STEEM", "DAG", "USTC", "FXS"];
@@ -1782,7 +1784,7 @@
                 font-weight:600;
             }
 
-        #futures-select-dropdown {
+        .dropdown-select {
             width: 100%;
             height: 100%;
             border: 1px solid #000;
@@ -1807,9 +1809,6 @@
 
         <header class="user-bar">
                 <a href="https://www.jsstradetool.com/" class="main-logo"><img src="/static/assets/imgs/JSServices-Logo.png" alt="logo" ></a>
-            <div class="futures-select">
-                <p><button>futures</button></p>
-            </div>
 
             <!-- <a href="/dashboard/">View Dashboard</a>-->
             <!-- <div class="user-bar__info">
@@ -1832,17 +1831,43 @@
                         PlayBook
                     </div>
                     <div class="header">
+                        <!--
                         <div class="item filter filter-date" style="background-color: #fff;height: 36px;">
                             <ul></ul>
                         </div>
+
                         <div class="item filter filter-indicator" style="background-color: #fff;height: 36px;">
                             <ul></ul>
                         </div>
+
                         <div class="item filter filter-symbol" style="background-color: #fff;height: 36px;">
                             <ul></ul>
                         </div>
+                            -->
+
+
                         <div class="" style="height: 36px;">
-                            <select class="dropdown-select" name="futures-select-dropdown" id="futures-select-dropdown" selected="binance" >
+                            <select class="dropdown-select" name="date-select-dropdown" id="date-select-dropdown">
+                            </select>
+                        </div>
+
+                        <div class="" style="height: 36px;">
+                            <select class="dropdown-select" name="indicator-select-dropdown" id="indicator-select-dropdown">
+                            </select>
+                        </div>
+                        <div class="" style="height: 36px;">
+                            <select class="dropdown-select" name="symbol-select-dropdown" id="symbol-select-dropdown">
+                            </select>
+                        </div>
+
+
+                        <!--
+                        <div class="" style="height: 36px;">
+                            <select class="dropdown-select" name="symbol-select-dropdown" id="symbol-select-dropdown" >
+                            </select>
+                        </div> -->
+                        <div class="" style="height: 36px;">
+                            <select class="dropdown-select" name="futures-select-dropdown" id="futures-select-dropdown" selected="binance">
                                 <option value="binance">Crypto</option>
                                 <option value="futures">Futures</option>
                             </select>

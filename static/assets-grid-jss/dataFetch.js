@@ -71,7 +71,7 @@ export async function getDataByDate(date) {
 
 
 
-      console.log(arrData);
+      //console.log(arrData);
 
     return await arrData;
   } catch (error) {
