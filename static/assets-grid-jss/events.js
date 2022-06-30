@@ -262,7 +262,7 @@ export default async function renderBlockInformationOnClick(e) {
     splitHeaderTab2[2] = '<span class="green-text">' + splitHeaderTab2[2] + '</span>';
 
     tab2Header.innerHTML= splitHeaderTab2.join(" - ");
-    console.log(tab2Header.innerHTML);
+
 
   //tab2Header.innerHTML = Structure(trendNumber).theme;
   tab2Overview.innerText = Structure(trendNumber).overview;
