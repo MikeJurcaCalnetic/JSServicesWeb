@@ -249,13 +249,28 @@ export default async function renderBlockInformationOnClick(e) {
       ) || "";
   });
 
-  tab2Header.innerText = Structure(trendNumber).theme;
+    var splitHeaderTab2 = Structure(trendNumber).theme.split(" - ");
+
+
+    var textOriginal = splitHeaderTab2[1];
+
+    splitHeaderTab2[1] = splitHeaderTab2[1].replace(/NEGATIVE/g, '<span class="red-pastel">' + textOriginal + '</span>');
+    splitHeaderTab2[1] = splitHeaderTab2[1].replace(/POSITIVE/g, '<span class="blue">' + textOriginal + '</span>');
+    splitHeaderTab2[1] = splitHeaderTab2[1].replace(/NO BIAS/g, '<span class="tan">' + textOriginal + '</span>');  
+
+
+    splitHeaderTab2[2] = '<span class="green-text">' + splitHeaderTab2[2] + '</span>';
+
+    tab2Header.innerHTML= splitHeaderTab2.join(" - ");
+    console.log(tab2Header.innerHTML);
+
+  //tab2Header.innerHTML = Structure(trendNumber).theme;
   tab2Overview.innerText = Structure(trendNumber).overview;
   marketStructureBiasGraph.style.backgroundImage = `url('/static/assets/imgs/playbook/MSB_${trendNumber}.png')`;
   //strategy tab set data
-  tab3Header.innerHTML = Strategy(trendNumber).theme;
+    tab3Header.innerHTML = Strategy(trendNumber).theme.replace(/HEDGE/g, '<br />HEDGE');
   tab3Overview.innerText = Strategy(trendNumber).overview.replace(/\<span class=\"red\"\>SELL\<\/span\>/g,'SELL')
-  .replace(/\<span class=\"blue\"\>BUY\<\/span\>/g,'BUY');
+      .replace(/\<span class=\"blue\"\>BUY\<\/span\>/g, 'BUY');
   optimalStrategyGraph.style.backgroundImage = `url('/static/assets/imgs/playbook/MSB_${trendNumber}_O.png')`;
   hedgeStrategyGraph.style.backgroundImage = `url('/static/assets/imgs/playbook/MSB_${trendNumber}_H.png')`;
   renderGraph(

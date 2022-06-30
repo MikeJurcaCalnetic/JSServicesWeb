@@ -96,6 +96,7 @@ export default async function renderBlocks(blockGroup, dataByDate = false) {
       symbol.style.color = textColor;
       //if (getDataMode() === "crypto") symbol.style.fontSize = "12px";
         const splitedName = blockItem["name"].split(".");
+
         item.classList.add(blockItem["name"].replace(".", "_").replace(".", "_"));
       var symbolObject = getSymbol(splitedName[1]);
 

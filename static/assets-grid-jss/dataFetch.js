@@ -44,8 +44,12 @@ export default async function FetchData(tableName = "binance", reload = false) {
 
     const { data, filters } = await arrData;
 
-    if (await arrData)
-      document.querySelector(".page-jss-loading").style.display = "none";
+      if (await arrData) {
+          document.querySelector(".page-jss-loading").style.display = "none";
+
+          setDateStamps();
+      }
+
     setData(await arrData);
     renderFilters(await filters.d, await data);
 
@@ -69,6 +73,9 @@ export async function getDataByDate(date) {
     //  .then((r) => JSON.parse(r))
     //      .then((r) => r.data);
 
+        //if (await arrData) {
+        //    console.log(Date.now());
+        //}
 
 
       //console.log(arrData);
@@ -90,11 +97,43 @@ function setDataSelect(tableName) {
     inputPlace.addEventListener("change", async function (e) {
         e.preventDefault;
         const newData = await FetchData(buttonFetchTableName, true);
+
+        //if (await newData) {
+        //    console.log(Date.now());
+        //}
+
         const { filters, data } = await newData;
         renderFilters(await filters.d, await data);
     });
 
     setRefreshUrl(tableName);
+}
+
+function setDateStamps() {
+    var utcDate = new Date();
+    var utcDateStr = utcDate.toLocaleString("en-US", {
+        year: 'numeric',
+        month: 'numeric',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        second: 'numeric'
+    })
+    var userDate = new Date(utcDateStr + " UTC");
+    var locale = window.navigator.userLanguage || window.navigator.language;
+    var clientDateTimeStr = userDate.toLocaleString(locale, {
+        year: 'numeric',
+        month: 'numeric',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        second: 'numeric'
+    });
+    //console.log(utcDateStr);
+    //console.log(clientDateTimeStr);
+
+    document.getElementById("utc-date-stamp").innerHTML = utcDateStr;
+    document.getElementById("local-date-stamp").innerHTML = clientDateTimeStr;
 }
 
 //function renderButtons(tableName) {

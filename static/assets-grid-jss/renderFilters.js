@@ -18,6 +18,7 @@ export default function renderFilters(filterArrDates, dataByDate) {
 
 
  filterBlockIndicators.innerHTML = "";
+    filterBlockSymbols.innerHTML = "";
 
     filterBlockSymbols.addEventListener("change", async function (e) {
   
@@ -34,7 +35,7 @@ export default function renderFilters(filterArrDates, dataByDate) {
        // console.log(filterDate);
       //  console.log(filterIndicator);
        // console.log(filterSymbol);
-        box.click()
+        box.click();
 
     });
 

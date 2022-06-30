@@ -270,12 +270,21 @@
             box-sizing: border-box !important
         }
 
+
         .red {
             color: red;
         }
 
+        .red-pastel {
+            color: #F7494C;
+        }
+
         .blue {
-            color: blue;
+            color: #7C73FB;
+        }
+
+        .tan {
+            color: #BD9128;
         }
 
         body {
@@ -1026,7 +1035,7 @@
                 .section-info .info-wrap #tab1 {
                     grid-template-columns: repeat(4, 1fr);
                     //grid-template-rows: 125px calc((100% - 100px)*.6) calc((100% - 100px)*.4);
-                    grid-template-rows: 125px auto 350px;
+                    grid-template-rows: 125px auto minmax(200px,auto);
                     grid-template-columns: 120px auto auto 120px;
                     grid-template-areas: "area2 area2 area2 area2""area1 area1 area1 area1""area3 area4 area4 area5"
                 }
@@ -1367,7 +1376,7 @@
                 .section-info .info-wrap #tab3 {
                     grid-template-columns: repeat(2, 1fr);
                     //grid-template-rows: 125px calc((100% - 125px)*.4) calc((100% - 125px)*.6);
-                    grid-template-rows: 125px auto 300px;
+                    grid-template-rows: 125px auto minmax(200px,auto);
                     grid-template-areas: "area4 area4""area1 area1""area2 area3"
                 }
 
@@ -1680,7 +1689,7 @@
         }
 
         .main-container {
-            padding: 50px 50px 100px 50px;
+            padding: 20px 50px 100px 50px;
         }
 
         .section-boxes, .section-trades {
@@ -1712,8 +1721,7 @@
         }
 
             .main-logo img {
-                height: 60px;
-                border-radius: 12px;
+                height: 45px;
                 padding-left: 0 10px 0 10px;
             }
 
@@ -1792,6 +1800,11 @@
             font-weight: 600;
         }
 
+        .dropdown-select:focus {
+            outline: 0;
+            box-shadow: 0;
+        }
+
         .dropdown-select-date {
             width: 80%;
             height: 100%;
@@ -1820,6 +1833,15 @@
             background: #EFEFEF;
         }
 
+        .date-stamps {
+            float: right;
+            text-align: right;
+        }
+
+        .green-text {
+            color: #09E334;
+        }
+
     </style>
 </head>
 
@@ -1829,7 +1851,10 @@
 
         <header class="user-bar">
                 <a href="https://www.jsstradetool.com/" class="main-logo"><img src="/static/assets/imgs/JSServices-Logo.png" alt="logo" ></a>
-
+                <div class="date-stamps">
+                    <span>UTC: </span><span id="utc-date-stamp"></span><br />
+                    <span>Local: </span><span id="local-date-stamp"></span>
+                </div>
             <!-- <a href="/dashboard/">View Dashboard</a>-->
             <!-- <div class="user-bar__info">
       <button
