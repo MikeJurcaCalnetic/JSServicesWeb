@@ -146,18 +146,18 @@ export default async function renderBlockInformationOnClick(e) {
   );
   const symbolInfoTab3 = document.querySelector("#tab3 .area4 div.symbol-info");
   // discovery tab
-  const phaseDailyRst = document.querySelector(
-    "#tab4 .area2 #dailyrst .time-phase__value"
-  );
-  const phaseDaily24 = document.querySelector(
-    "#tab4 .area2 #daily24h .time-phase__value"
-  );
-  const phaseWeekly = document.querySelector(
-    "#tab4 .area2 #weekly .time-phase__value"
-  );
-  const phaseMonthly = document.querySelector(
-    "#tab4 .area2 #monthly .time-phase__value"
-  );
+  //const phaseDailyRst = document.querySelector(
+  //  "#tab4 .area2 #dailyrst .time-phase__value"
+  //);
+  //const phaseDaily24 = document.querySelector(
+  //  "#tab4 .area2 #daily24h .time-phase__value"
+  //);
+  //const phaseWeekly = document.querySelector(
+  //  "#tab4 .area2 #weekly .time-phase__value"
+  //);
+  //const phaseMonthly = document.querySelector(
+  //  "#tab4 .area2 #monthly .time-phase__value"
+  //);
 
   //state tab setdata
   [
@@ -287,15 +287,15 @@ export default async function renderBlockInformationOnClick(e) {
   // discoveryGraphCalculations(currentObject, lastValue, arr);
 
   //discovery tab
-  phaseDailyRst.style.backgroundColor = `rgb(${thisPhases.dailyrst.bg})`;
-  phaseDaily24.style.backgroundColor = `rgb(${thisPhases.daily24.bg})`;
-  phaseWeekly.style.backgroundColor = `rgb(${thisPhases.weekly.bg})`;
-  phaseMonthly.style.backgroundColor = `rgb(${thisPhases.monthly.bg})`;
+ // phaseDailyRst.style.backgroundColor = `rgb(${thisPhases.dailyrst.bg})`;
+ // phaseDaily24.style.backgroundColor = `rgb(${thisPhases.daily24.bg})`;
+  //phaseWeekly.style.backgroundColor = `rgb(${thisPhases.weekly.bg})`;
+  //phaseMonthly.style.backgroundColor = `rgb(${thisPhases.monthly.bg})`;
 
-  phaseDailyRst.innerText = `${thisPhases.dailyrst.value}`;
-  phaseDaily24.innerText = `${thisPhases.daily24.value}`;
-  phaseWeekly.innerText = `${thisPhases.weekly.value}`;
-  phaseMonthly.innerText = `${thisPhases.monthly.value}`;
+ // phaseDailyRst.innerText = `${thisPhases.dailyrst.value}`;
+ // phaseDaily24.innerText = `${thisPhases.daily24.value}`;
+  //phaseWeekly.innerText = `${thisPhases.weekly.value}`;
+  //phaseMonthly.innerText = `${thisPhases.monthly.value}`;
 }
 export function filterItemsByIndicator(filterValue) {
   const boxWrapItems = document.querySelectorAll(".boxes-wrap .item");

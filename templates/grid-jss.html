@@ -1453,23 +1453,24 @@
                         grid-area: area4
                     }
 
-                .section-info .info-wrap #tab4 {
-                    grid-template-columns: 45% repeat(2, calc(55%/2));
-                    grid-template-rows: auto 1fr;
-                    row-gap: 5px;
-                    -webkit-column-gap: 5px;
-                    -moz-column-gap: 5px;
-                    column-gap: 5px;
-                    grid-template-areas: "area2 area2 area2""area1 . .  "
+            .section-info .info-wrap #tab4 {
+                grid-template-columns: auto;
+                grid-template-rows: auto;
+                row-gap: 5px;
+                -webkit-column-gap: 5px;
+                -moz-column-gap: 5px;
+                column-gap: 5px;
+                grid-template-areas: "area1"
+            }
+
+                .section-info .info-wrap #tab4 .area1 {
+                    grid-area: area1;
+                    max-height: 100%;
+                    color: #fff;
+                    padding-top: 15px;
                 }
 
-                    .section-info .info-wrap #tab4 .area1 {
-                        grid-area: area1;
-                        max-height: 100%;
-                        color: #fff;
-                    }
-
-                    .section-info .info-wrap #tab4 .area2 {
+/*                    .section-info .info-wrap #tab4 .area2 {
                         grid-area: area2;
                         -ms-flex-pack: distribute;
                         justify-content: space-around;
@@ -1495,11 +1496,11 @@
                         -webkit-box-align: end;
                         -ms-flex-align: end;
                         align-items: flex-end
-                    }
+                    }*/
 
                     .imagesBlock,
                     .section-date,
-                    .section-info .info-wrap #tab4 .area2 {
+                    .section-info .info-wrap {
                         display: -webkit-box;
                         display: -ms-flexbox;
                         display: flex
@@ -2022,7 +2023,7 @@
 
                             <div class="tab"><a href="tab3">STRATEGY</a></div>
 
-                            <div class="tab"><a href="tab6">OPTIONS</a></div>
+                            <div class="tab"><a href="tab4">OPTIONS</a></div>
 
                             <div class="tab"><a href="tab6">DASHBOARD</a></div>
 
@@ -2172,7 +2173,28 @@
                                     </div>
                                 </div>
                             </div>-->
+                            <div id="tab4" class="item">
+                                <div class="area area1">
+                                    <p>
 
+                                        OPTIMAL = <span class="red">SELL</span> <span class="blue">CALLS</span> at the UP on a FADE; <span class="red">SELL PUTS</span> at the DP on a FADE <br />
+                                        <br />
+                                        HEDGE = <span class="blue">BUY CALLS</span> / <span class="red">SELL PUTS</span> on UP BREAKOUT; <span class="blue">BUY</span> <span class="red">PUTS</span> / <span class="red">SELL</span> <span class="blue">CALLS</span> on DP BREAKOUT <br />
+                                        <br />
+                                        OPTIONS ANALYSIS<br />
+                                        <br />
+                                        In a Neutral Digestive (NEU) market state look to sell options, either early in the trading session on marketrallies and breaksat Major PriceMap levels or minor level extremes.  Until a breakoutis confirmed above the UP (Upside Pivot) or below the DP (Downside Pivot), a trader should resist buying options, as false signals and sideways trading is likely.  A trader may be presented with several opportunities during the sessionto move in and out ofoption sales profitably. Capitalizing on these tradeswhen able can lead to successful trading periods even when the underlying market has little net movement.  Traders entering the session short options may look to hold these positions until a breakout is signaled.  Traders with long positions may want to use what movement the market offers to cover positions.<br />
+                                        <br />
+                                        DIRECTIONAL PRICE EXPECTATION<br />
+                                        <br />
+                                        NEUTRAL DIGESTIVE sessions can be the precursor to a “BREAKOUT” as the coiling action will build power. Typically, a sign that the sentiment is going to change from NEUTRAL DIGESTION to TREND is signaled by an early session trend move with no break in the positive or negative structure. A simple Moving Average is a great tool to use to identify a possible “Breakout” day with the expectation that if the market is going to scale up or down it will maintain a trade above or below the Moving Average. <br />
+                                        <br />
+                                        -   SIDEWAYS PRICE EXPECTATION.<br />
+                                        -   “BREAKOUT” MORE LIKELY WHEN R = DIR.<br />
+
+                                    </p>
+                                </div>
+                            </div>
                             <div id="tab5" class="item">
                                 <div class="download">
                                     <a href="http://159.89.118.206/get_pm_file?filename=PriceMap-Futures-All.csv" target="_blank">DOWNLOAD</a>
