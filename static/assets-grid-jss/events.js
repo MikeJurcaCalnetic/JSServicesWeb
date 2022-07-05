@@ -4,7 +4,7 @@ import {
   getColorMarketState,
 } from "/static/assets-grid-jss/colorBlockValues.js";
 import { getDataMode } from "/static/assets-grid-jss/status.js";
-import { renderGraph } from "/static/assets-grid-jss/charts.js";
+//import { renderGraph } from "/static/assets-grid-jss/charts.js";
 import SymbolDescription from "/static/assets-grid-jss/symbolDescription.js";
 import Structure from "/static/assets-grid-jss/structure.js";
 import getMarketAttributesByCode from "/static/assets-grid-jss/marketAtributes.js";
@@ -86,19 +86,22 @@ export default async function renderBlockInformationOnClick(e) {
     "#tab2 .area4 .graph"
   );
   const structureAPMD = document.querySelector(
-    "#tab2 .mmarea .mmarea_item-apmd .metric"
-  );
-  const structureAPMDTicks = document.querySelector(
-    "#tab2 .mmarea .mmarea_item-apmdticks .metric"
-  );
+    "#tab2 .metric-apmd"
+    );
+    const structureHalfAPMD = document.querySelector(
+        "#tab2 .metric-halfapmd"
+    );
+    const structureAPMDTicks = document.querySelector(
+        "#tab2 .metric-apmdt"
+    );
   const structureVAR = document.querySelector(
-    "#tab2 .mmarea .mmarea_item-var .metric"
+    "#tab2 .metric-var"
   );
   const structureAD = document.querySelector(
-    "#tab2 .mmarea .mmarea_item-ad .metric"
+    "#tab2 .metric-ad"
   );
   const structureMSD = document.querySelector(
-    "#tab2 .mmarea .mmarea_item-msd .metric"
+    "#tab2 .metric-msd"
   );
   const marketStateItems = document.querySelectorAll(
     "#tab2 .area2 .market-state .market-state_item-value"
@@ -227,7 +230,8 @@ export default async function renderBlockInformationOnClick(e) {
   tab1Overview.innerHTML = Strategy(trendtypeData.code).overview;
 
   //structure tab set data
-  structureAPMD.innerText = currentObject[0].apmd;
+    structureAPMD.innerText = currentObject[0].apmd;
+    structureHalfAPMD.innerText = currentObject[0].apmd / 2;
   structureAPMDTicks.innerText = currentObject[0].apmdticks;
   structureVAR.innerText = currentObject[0].var;
   structureAD.innerText = currentObject[0].ad;
@@ -273,13 +277,13 @@ export default async function renderBlockInformationOnClick(e) {
       .replace(/\<span class=\"blue\"\>BUY\<\/span\>/g, 'BUY');
   optimalStrategyGraph.style.backgroundImage = `url('/static/assets/imgs/playbook/MSB_${trendNumber}_O.png')`;
   hedgeStrategyGraph.style.backgroundImage = `url('/static/assets/imgs/playbook/MSB_${trendNumber}_H.png')`;
-  renderGraph(
-    arr
-      .filter((item) => item.name == blockData.fullName)
-      .map((item) => {
-        return { date: item.date, apmd: item.apmd, volume: item.volume };
-      })
-  );
+  //renderGraph(
+  //  arr
+  //    .filter((item) => item.name == blockData.fullName)
+  //    .map((item) => {
+  //      return { date: item.date, apmd: item.apmd, volume: item.volume };
+  //    })
+  //);
   // discoveryGraphCalculations(currentObject, lastValue, arr);
 
   //discovery tab

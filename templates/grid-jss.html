@@ -376,7 +376,7 @@
             max-width: 1920px !important;
             width: 100%;
             display: grid;
-            grid-template-columns: 1fr minmax(300px, 20%) minmax(520px, 1fr);
+            grid-template-columns: minmax(500px, 1fr) minmax(300px, 20%) minmax(520px, 1fr);
             grid-template-rows: auto 25px;
             grid-template-areas: "sectionBoxes sectionTrades sectionInfo""sectionBoxes sectionDate sectionInfo";
             row-gap: 5px;
@@ -444,8 +444,7 @@
             display: grid;
             grid-template-rows: 30px 40px auto;
             row-gap: 10px;
-            max-height: 913px;
-            height: 100%;
+            max-height: 800px;
             grid-area: sectionBoxes
         }
 
@@ -961,6 +960,7 @@
             grid-template-rows: 30px 40px 1fr;
             row-gap: 5px;
             grid-area: sectionInfo;
+            max-height: 800px;
         }
 
             .section-info .header,
@@ -1017,10 +1017,6 @@
                         opacity: 1
                     }
 
-            .section-info .info-wrap {
-                max-height: 838px;
-                overflow-y: auto
-            }
 
                 .section-info .info-wrap .item {
                     display: none;
@@ -1032,13 +1028,13 @@
                     display: grid !important
                 }
 
-                .section-info .info-wrap #tab1 {
-                    grid-template-columns: repeat(4, 1fr);
-                    //grid-template-rows: 125px calc((100% - 100px)*.6) calc((100% - 100px)*.4);
-                    grid-template-rows: 125px auto minmax(200px,auto);
-                    grid-template-columns: 120px auto auto 120px;
-                    grid-template-areas: "area2 area2 area2 area2""area1 area1 area1 area1""area3 area4 area4 area5"
-                }
+            .section-info .info-wrap #tab1 {
+                grid-template-columns: repeat(4, 1fr);
+                //grid-template-rows: 125px calc((100% - 100px)*.6) calc((100% - 100px)*.4);
+                grid-template-rows: 125px auto minmax(200px,400px);
+                grid-template-columns: 120px auto auto 120px;
+                grid-template-areas: "area2 area2 area2 area2""area1 area1 area1 area1""area3 area4 area4 area5"
+            }
 
                     .section-info .info-wrap #tab1 .area1 {
                         grid-area: area1;
@@ -1203,11 +1199,11 @@
                             background-position: top;
                         }
 
-                .section-info .info-wrap #tab2 {
-                    grid-template-columns: repeat(4, 1fr);
-                    grid-template-rows: 125px calc((100% - 125px)*.4) calc((100% - 125px)*.15) calc((100% - 125px)*.45);
-                    grid-template-areas: "area5 area5 area5 area5""area1 area1 area1 area1""mmarea mmarea mmarea mmarea""area2 area4 area4 area4"
-                }
+            .section-info .info-wrap #tab2 {
+                grid-template-columns: repeat(4, 1fr);
+                grid-template-rows: 125px 300px minmax(200px,auto);
+                grid-template-areas: "area5 area5 area5 area5""area1 area1 area1 area1""area2 area4 area4 area4"
+            }
 
                     .section-info .info-wrap #tab2 .area1 {
                         grid-area: area1;
@@ -1283,7 +1279,8 @@
                                 border-radius: 12px
                             }
 
-                    .section-info .info-wrap #tab2 .area2,
+                    .section-info .info-wrap #tab2 .area2 {
+                    }
                     .section-info .info-wrap #tab2 .area3 {
                         -webkit-box-pack: center;
                         -ms-flex-pack: center;
@@ -1294,7 +1291,7 @@
                         grid-area: area2;
                         display: -webkit-box;
                         display: -ms-flexbox;
-                        display: flex
+                       padding-top:20px;
                     }
 
                         .section-info .info-wrap #tab2 .area2 .header {
@@ -1342,10 +1339,11 @@
                             height: calc(100% - 30px)
                         }
 
-                    .section-info .info-wrap #tab2 .area4 {
-                        grid-area: area4;
-                        padding-left: 5px
-                    }
+                .section-info .info-wrap #tab2 .area4 {
+                    grid-area: area4;
+                    padding-left: 5px;
+                    padding-top:20px;
+                }
 
                         .section-info .info-wrap #tab2 .area4 .header {
                             display: -webkit-box;
@@ -1373,12 +1371,12 @@
                         grid-area: area5
                     }
 
-                .section-info .info-wrap #tab3 {
-                    grid-template-columns: repeat(2, 1fr);
-                    //grid-template-rows: 125px calc((100% - 125px)*.4) calc((100% - 125px)*.6);
-                    grid-template-rows: 125px auto minmax(200px,auto);
-                    grid-template-areas: "area4 area4""area1 area1""area2 area3"
-                }
+            .section-info .info-wrap #tab3 {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: 125px minmax(auto, 350px) minmax(200px,auto);
+                grid-template-areas: "area4 area4""area1 area1""area2 area3";
+                overflow-y: auto;
+            }
 
                     .section-info .info-wrap #tab3 .area1 {
                         grid-area: area1;
@@ -1527,7 +1525,8 @@
             width: 100%;
             justify-content: center;
             -ms-flex-wrap: wrap;
-            flex-wrap: wrap
+            flex-wrap: wrap;
+            row-gap: 30px;
         }
 
         .imagesBlock-item {
@@ -1689,7 +1688,7 @@
         }
 
         .main-container {
-            padding: 20px 50px 100px 50px;
+            padding: 20px 50px 20px 50px;
         }
 
         .section-boxes, .section-trades {
@@ -1840,6 +1839,17 @@
 
         .green-text {
             color: #09E334;
+        }
+
+        .market-metrics {
+            color: white;
+            display: grid;
+            grid-area: market-metrics-area;
+            grid-template-areas: "name" "metric-val";
+            grid-template-columns: 100px auto;
+            grid-template-rows: 24px auto;
+            row-gap: 3px;
+            column-gap: 3px;
         }
 
     </style>
@@ -2061,71 +2071,26 @@
                                         sem nec integer urna
                                     </p>
                                 </div>
-                                <div class="area mmarea">
-                                    <h3>Market Metrics</h3>
-                                    <div class="mmarea_item mmarea_item-apmd">
-                                        <div class="name">APMD</div>
-                                        <div class="metric"></div>
-                                    </div>
-                                    <div class="mmarea_item mmarea_item-apmdticks">
-                                        <div class="name">APMDT</div>
-                                        <div class="metric"></div>
-                                    </div>
-                                    <div class="mmarea_item mmarea_item-var">
-                                        <div class="name">VAR</div>
-                                        <div class="metric"></div>
-                                    </div>
-                                    <div class="mmarea_item mmarea_item-ad">
-                                        <div class="name">AD</div>
-                                        <div class="metric"></div>
-                                    </div>
-                                    <div class="mmarea_item mmarea_item-msd">
-                                        <div class="name">MSD</div>
-                                        <div class="metric"></div>
-                                    </div>
-                                </div>
                                 <div class="area area2">
-                                    <div class="header">APMD</div>
-                                    <div class="graph">
-                                        <canvas id="volumeGraph" style="height: 211px; width: 116px"></canvas>
-                                        <!-- <h4>State Indicators</h4> -->
-                                        <!-- <div class="market-state_item">
-                  <div class="market-state_item-title">MCS</div>
-                  <div class="market-state_item-value" data-value="mcs"></div>
-                </div>
-                <div class="market-state_item">
-                  <div class="market-state_item-title">MCV</div>
-                  <div class="market-state_item-value" data-value="mcv"></div>
-                </div>
-                <div class="market-state_item">
-                  <div class="market-state_item-title">MCC</div>
-                  <div class="market-state_item-value" data-value="mcc"></div>
-                </div>
-                <h4>Technical Profile</h4>
-                <div class="market-state_item">
-                  <div class="market-state_item-title">MAC</div>
-                  <div class="market-state_item-value" data-value="mac"></div>
-                </div>
-                <div class="market-state_item">
-                  <div class="market-state_item-title">DMI</div>
-                  <div class="market-state_item-value" data-value="dmi"></div>
-                </div>
-                <div class="market-state_item">
-                  <div class="market-state_item-title">ADX</div>
-                  <div class="market-state_item-value" data-value="adx"></div>
-                </div>
-                <div class="market-state_item">
-                  <div class="market-state_item-title">RSI</div>
-                  <div class="market-state_item-value" data-value="rsi"></div>
-                </div>
-                <div class="market-state_item">
-                  <div class="market-state_item-title">SSTOC</div>
-                  <div class="market-state_item-value" data-value="sst"></div>
-                </div>
-                <div class="market-state_item">
-                  <div class="market-state_item-title">DC</div>
-                  <div class="market-state_item-value" data-value="dc"></div>
-                </div> -->
+                                    <div class="header">Market Metrics</div>
+                                    <div class="market-metrics market-metrics-area">
+                                        <div class="name market-metrics-area">APMD</div>
+                                        <div class="metric-val metric-apmd market-metrics-area"></div>
+
+                                        <div class="name market-metrics-area">1/2 APMD</div>
+                                        <div class="metric-val metric-halfapmd market-metrics-area"></div>
+
+                                        <div class="name market-metrics-area">APMDT</div>
+                                        <div class="metric-val metric-apmdt market-metrics-area"></div>
+
+                                        <div class="name market-metrics-area">VAR</div>
+                                        <div class="metric-val metric-var market-metrics-area"></div>
+
+                                        <div class="name market-metrics-area">AD</div>
+                                        <div class="metric-val metric-ad market-metrics-area"></div>
+
+                                        <div class="name market-metrics-area">MSD</div>
+                                        <div class="metric-val metric-msd market-metrics-area"></div>
                                     </div>
                                 </div>
                                 <div class="area area3">
@@ -2182,7 +2147,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div id="tab4" class="item">
+                            <!--<div id="tab4" class="item">
                                 <div class="area area1">
                                     <div class="graph">
                                         <canvas id="discoveryGraph" height="528" style="height: 528px; width: 240px"></canvas>
@@ -2206,7 +2171,8 @@
                                         <div class="time-phase__name">monthly</div>
                                     </div>
                                 </div>
-                            </div>
+                            </div>-->
+
                             <div id="tab5" class="item">
                                 <div class="download">
                                     <a href="http://159.89.118.206/get_pm_file?filename=PriceMap-Futures-All.csv" target="_blank">DOWNLOAD</a>
