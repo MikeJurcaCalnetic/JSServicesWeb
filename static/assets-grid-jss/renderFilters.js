@@ -1,5 +1,5 @@
 import renderBlocks from "/static/assets-grid-jss/renderBlocks.js";
-import { filterItemsByIndicator } from "/static/assets-grid-jss/events.js";
+import { filterItemsByIndicator, filterItemsByRVal } from "/static/assets-grid-jss/events.js";
 import { getDataMode } from "/static/assets-grid-jss/status.js";
 import renderBlockInformationOnClick from "/static/assets-grid-jss/events.js";
 
@@ -14,6 +14,7 @@ export default function renderFilters(filterArrDates, dataByDate) {
   const filterBlockDates = document.getElementById("date-select-dropdown");
     const filterBlockIndicators = document.getElementById("indicator-select-dropdown");
   const filterBlockSymbols = document.getElementById("symbol-select-dropdown");
+
 
 
 
@@ -40,7 +41,18 @@ export default function renderFilters(filterArrDates, dataByDate) {
     });
 
     filterBlockIndicators.addEventListener("change", async function (e) {
-        filterItemsByIndicator(filterBlockIndicators.value);
+
+
+        var group = filterBlockIndicators.options[filterBlockIndicators.selectedIndex].parentElement;
+        
+        if (group.getAttribute("label") === "EXCHANGE") {
+            filterItemsByIndicator(filterBlockIndicators.value);
+        }
+        else if (group.getAttribute("label") === "R=") {
+            filterItemsByRVal(filterBlockIndicators.value);
+        }
+
+
     });
 
     filterBlockDates.addEventListener("change", async function (e) {
@@ -111,7 +123,12 @@ export default function renderFilters(filterArrDates, dataByDate) {
       }
 
       filterBlockDates.append(filterItem);
-    });
+      });
+
+
+
+    let filterItemGroup = document.createElement("optgroup");
+    filterItemGroup.setAttribute("label", "EXCHANGE");
 
   filterArrIndicators.forEach((filterArrItem) => {
       let filterItem = document.createElement("option");
@@ -124,8 +141,27 @@ export default function renderFilters(filterArrDates, dataByDate) {
           filterBlockIndicators.value = filterArrItem;
     }
 
-    filterBlockIndicators.append(filterItem);
+      filterItemGroup.append(filterItem);
   });
+
+    const rValArry = ["R>UT1", "R=UT1", "R=CRX+", "R=UP", "R=DIR", "R=DP", "R=CRX-", "R=DT1", "R<DT1"];
+
+    let RfilterItemGroup = document.createElement("optgroup");
+    RfilterItemGroup.setAttribute("label", "R=");
+
+    rValArry.forEach((filterArrItem) => {
+        let filterItem = document.createElement("option");
+
+        filterItem.innerText = filterArrItem;
+        filterItem.setAttribute("value", filterArrItem.replace("R",""));
+
+        RfilterItemGroup.append(filterItem);
+    });
+
+    
+
+    filterBlockIndicators.append(filterItemGroup);
+    filterBlockIndicators.append(RfilterItemGroup);
 
     renderBlocks(filterBlockDates.value);
         

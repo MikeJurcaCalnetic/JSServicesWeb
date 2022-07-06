@@ -227,7 +227,11 @@ export default async function renderBlockInformationOnClick(e) {
 
   // marketAttributesGraph.style.backgroundImage = `url('../imgs/playbook/MSB_${trendtypeData.code}_MA.png')`;
   // tab1Header.innerText = `MARKET STATE:#${currentObject[0].msb} - ${trendtypeData.mcsDescription}`;
-  tab1Overview.innerHTML = Strategy(trendtypeData.code).overview;
+
+
+
+    tab1Overview.innerHTML = BreakupTextBlock(Strategy(trendtypeData.code).overview);
+
 
   //structure tab set data
     structureAPMD.innerText = currentObject[0].apmd;
@@ -269,12 +273,19 @@ export default async function renderBlockInformationOnClick(e) {
     //console.log(tab2Header.innerHTML);
 
   //tab2Header.innerHTML = Structure(trendNumber).theme;
-  tab2Overview.innerText = Structure(trendNumber).overview;
+    tab2Overview.innerHTML = BreakupTextBlock(Structure(trendNumber).overview);
+
   marketStructureBiasGraph.style.backgroundImage = `url('/static/assets/imgs/playbook/MSB_${trendNumber}.png')`;
   //strategy tab set data
     tab3Header.innerHTML = Strategy(trendNumber).theme.replace(/HEDGE/g, '<br />HEDGE');
+
+
   tab3Overview.innerText = Strategy(trendNumber).overview.replace(/\<span class=\"red\"\>SELL\<\/span\>/g,'SELL')
-      .replace(/\<span class=\"blue\"\>BUY\<\/span\>/g, 'BUY');
+        .replace(/\<span class=\"blue\"\>BUY\<\/span\>/g, 'BUY');
+
+    tab3Overview.innerHTML = BreakupTextBlock(tab3Overview.innerText);
+
+
   optimalStrategyGraph.style.backgroundImage = `url('/static/assets/imgs/playbook/MSB_${trendNumber}_O.png')`;
   hedgeStrategyGraph.style.backgroundImage = `url('/static/assets/imgs/playbook/MSB_${trendNumber}_H.png')`;
   //renderGraph(
@@ -296,7 +307,39 @@ export default async function renderBlockInformationOnClick(e) {
  // phaseDaily24.innerText = `${thisPhases.daily24.value}`;
   //phaseWeekly.innerText = `${thisPhases.weekly.value}`;
   //phaseMonthly.innerText = `${thisPhases.monthly.value}`;
+
+    function BreakupTextBlock(originalText) {
+        var everyPeriod = 2;
+        var overviewArr = originalText.split(". ");
+
+        for (var i = 0; i < overviewArr.length; i++) {
+            if (i + 1 != overviewArr.length) {
+                overviewArr[i] = overviewArr[i] + ". ";
+            }
+            if ((i + 1) % everyPeriod == 0) {
+                overviewArr[i] = overviewArr[i] + "<br/><br/>";
+            }
+        }
+
+        return overviewArr.join("");
+
+    }
+
 }
+export function filterItemsByRVal(filterValue) {
+    const boxRValItems = document.querySelectorAll(".boxes-wrap .item .rValue");
+    boxRValItems.forEach((item) => (item.parentNode.parentNode.style.display = "block"));
+    console.log(boxRValItems);
+    if (filterValue == "ALL") {
+        return;
+    } else {
+        boxRValItems.forEach((item) => {
+            if (!item.innerText.includes(filterValue))
+                item.parentNode.parentNode.style.display = "none";
+        });
+    }
+}
+
 export function filterItemsByIndicator(filterValue) {
   const boxWrapItems = document.querySelectorAll(".boxes-wrap .item");
   boxWrapItems.forEach((item) => (item.parentNode.style.display = "block"));
