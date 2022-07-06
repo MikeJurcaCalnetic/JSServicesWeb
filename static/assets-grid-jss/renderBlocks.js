@@ -1,24 +1,15 @@
 import getColorBlockTrendTypeObj from "/static/assets-grid-jss/trendType.js";
-import renderSymbolFilter, { setSymbolFilter } from "/static/assets-grid-jss/renderSymbolFilter.js";
+import {renderSymbolFilter, setSymbolFilter } from "/static/assets-grid-jss/renderFilters.js";
 import renderBlockInformationOnClick from "/static/assets-grid-jss/events.js";
-import renderPriceMap, {
-  setClosestSymbolDateWeek,
-  setClosestSymbolDateMonth,
-} from "/static/assets-grid-jss/renderPriceMap.js";
-import {
-  getColorBlockRValue,
-  getColorBlockRValueRegime,
-} from "/static/assets-grid-jss/colorBlockValues.js";
+import renderPriceMap, { setClosestSymbolDateWeek, setClosestSymbolDateMonth, } from "/static/assets-grid-jss/renderPriceMap.js";
+import { getColorBlockRValue, getColorBlockRValueRegime, } from "/static/assets-grid-jss/colorBlockValues.js";
 import { getDataMode, getData } from "/static/assets-grid-jss/status.js";
 import getMsbTextColor from "/static/assets-grid-jss/getMsbTextColor.js";
 import { getDataByDate } from "/static/assets-grid-jss/dataFetch.js";
 
 export default async function renderBlocks(blockGroup, dataByDate = false) {
   let arr;
-
-   
-
-
+ 
   if (dataByDate != false) {
     arr = dataByDate;
   } else {
@@ -26,7 +17,6 @@ export default async function renderBlocks(blockGroup, dataByDate = false) {
     }
 
     localStorage.setItem("arr", JSON.stringify(arr));
-
 
   if (await arr) {
     let blockGroupArr = arr
@@ -106,8 +96,6 @@ export default async function renderBlocks(blockGroup, dataByDate = false) {
             ? splitedName[0].length >= 6 ? `<span class="box-bigger-text">${splitedName[0]}</span>` : `<span class="box-big-text">${splitedName[0]}</span>`
                 : `<span class="box-small-text">${splitedName[0]}</span><span class="box-big-text">${symbolObject.coinSymbol}</span><span class="box-small-text">${symbolObject.currency}</span>`;
 
- 
-
       let marketState = document.createElement("div");
         marketState.classList.add(
             'marketState',
@@ -126,8 +114,6 @@ export default async function renderBlocks(blockGroup, dataByDate = false) {
       item.append(trendtype, symbol, marketState, rValue);
       itemWrap.append(item, itemEffects);
       boxWrap.append(itemWrap);
-
-      renderSymbolFilter(blockItem, arr);
       itemWrap.addEventListener("click", function (e) {
         e.currentTarget.children[0].click();
       });
@@ -150,7 +136,8 @@ export default async function renderBlocks(blockGroup, dataByDate = false) {
 
       if (blockGroupArr[0] == blockItem) item.click();
     });
-  }
+    }
+    renderSymbolFilter();
 }
 export function setTradeHeadersValues(e, arr) {
   const blockData = e.target.dataset;

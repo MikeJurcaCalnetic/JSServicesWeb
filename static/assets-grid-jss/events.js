@@ -329,7 +329,7 @@ export default async function renderBlockInformationOnClick(e) {
 export function filterItemsByRVal(filterValue) {
     const boxRValItems = document.querySelectorAll(".boxes-wrap .item .rValue");
     boxRValItems.forEach((item) => (item.parentNode.parentNode.style.display = "block"));
-    console.log(boxRValItems);
+
     if (filterValue == "ALL") {
         return;
     } else {

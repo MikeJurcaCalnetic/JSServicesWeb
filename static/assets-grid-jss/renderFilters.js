@@ -2,7 +2,7 @@ import renderBlocks from "/static/assets-grid-jss/renderBlocks.js";
 import { filterItemsByIndicator, filterItemsByRVal } from "/static/assets-grid-jss/events.js";
 import { getDataMode } from "/static/assets-grid-jss/status.js";
 import renderBlockInformationOnClick from "/static/assets-grid-jss/events.js";
-
+import SymbolDescription from "/static/assets-grid-jss/symbolDescription.js";
 
 export default function renderFilters(filterArrDates, dataByDate) {
   const today = new Date();
@@ -18,24 +18,16 @@ export default function renderFilters(filterArrDates, dataByDate) {
 
 
 
- filterBlockIndicators.innerHTML = "";
+    filterBlockIndicators.innerHTML = "";
     filterBlockSymbols.innerHTML = "";
 
     filterBlockSymbols.addEventListener("change", async function (e) {
   
-        
-        
 
-        const filterDate = document.getElementById("date-select-dropdown").value;
-        const filterIndicator = document.getElementById("indicator-select-dropdown").value;
         const filterSymbol = document.getElementById("symbol-select-dropdown").value;
 
         var box = document.querySelector('.' + filterSymbol);
 
-
-       // console.log(filterDate);
-      //  console.log(filterIndicator);
-       // console.log(filterSymbol);
         box.click();
 
     });
@@ -51,7 +43,7 @@ export default function renderFilters(filterArrDates, dataByDate) {
         else if (group.getAttribute("label") === "R=") {
             filterItemsByRVal(filterBlockIndicators.value);
         }
-
+        renderSymbolFilter();
 
     });
 
@@ -76,6 +68,8 @@ export default function renderFilters(filterArrDates, dataByDate) {
         filterArrIndicators.push(filter);
     });
     }
+
+
 
   filterArrDates
     .sort((a, b) => (a < b ? 1 : -1))
@@ -166,4 +160,42 @@ export default function renderFilters(filterArrDates, dataByDate) {
     renderBlocks(filterBlockDates.value);
         
 
+}
+export function renderSymbolFilter() {
+
+    const blocks = document.querySelectorAll(".itemWrap .item");
+    const filterBlockSymbols = document.getElementById("symbol-select-dropdown");
+    filterBlockSymbols.innerHTML = "";
+
+    for (var i = 0; i < blocks.length; i++) {
+
+        if (blocks[i].parentElement.style.display != "none") {
+
+            var filterItem = document.createElement("option");
+            filterItem.className = "filter-item";
+
+            var splitedFilterName = blocks[i].classList[1].split("_");
+            var filterName = splitedFilterName[1];
+
+            if (getDataMode() === "futures") {
+                filterItem.innerText = filterName + " - " + SymbolDescription(filterName);
+            }
+            else {
+                filterItem.innerText = filterName + " - " + splitedFilterName[0];
+            }
+
+            filterItem.setAttribute("value", blocks[i].classList[1]);
+
+            filterBlockSymbols.append(filterItem);
+
+        }
+    }
+
+    if (filterBlockSymbols.firstChild) {
+        filterBlockSymbols.value = filterBlockSymbols.firstChild.value;
+    }
+}
+export function setSymbolFilter(e) {
+    const filterBlockSymbols = document.getElementById("symbol-select-dropdown");
+    filterBlockSymbols.value = e;
 }
