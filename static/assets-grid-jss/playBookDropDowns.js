@@ -35,12 +35,6 @@ export default function setUpPlaybookDropDownListeners() {
     filterExchanges.addEventListener("change", async function (e) {
         console.log("indicator-select-dropdown = " + document.getElementById("indicator-select-dropdown").value);
 
-        //Retrieve data from the memory and Repopulate the collection for the Symbol dropdown. 
-        //Remove blocks / tiles that are not relevant to the selected Exchange.
-        //Remove all existing options from the Symbol dropdown.
-        //Regenerate the tiles, PriceMap and info in the tab area.
-
-
         var group = filterExchanges.options[filterExchanges.selectedIndex].parentElement;
 
         if (group.getAttribute("label") === "EXCHANGE") {
@@ -49,6 +43,10 @@ export default function setUpPlaybookDropDownListeners() {
         }
         else if (group.getAttribute("label") === "R=") {
             filterSymbolsListByRVal(filterExchanges.value);
+        }
+
+        if (filterExchanges.value === "ALL") {
+            setSymbolFilterCollection();
         }
 
         populateSymbolDropDown(); 
@@ -101,6 +99,7 @@ function setPlayBookDropDownData() {
 
     var arrData = JSON.parse(sessionStorage.getItem("arrData"));
     var exchangeFilter = [];
+    var rValueFilter = [];
 
     if (getDataMode() === "futures") {
         arrData.forEach((item) => {
@@ -110,6 +109,7 @@ function setPlayBookDropDownData() {
 
             if (!exchangeFilter.includes(filter))
                 exchangeFilter.push(filter);
+
         });
     }
     else {
@@ -121,12 +121,25 @@ function setPlayBookDropDownData() {
 
             if (!exchangeFilter.includes(filter))
                 exchangeFilter.push(filter);
+
+            if (!rValueFilter.includes(getColorBlockRValueRegime(item)))
+                rValueFilter.push(getColorBlockRValueRegime(item));
+
         });
     }
 
     sessionStorage.setItem("arrFilterExchange", JSON.stringify(exchangeFilter));
+    sessionStorage.setItem("arrFilterRValue", JSON.stringify(rValueFilter));
 
     //** Symbol Dropdown **//
+
+    setSymbolFilterCollection(); 
+
+    filterDataList();
+}
+
+function setSymbolFilterCollection() {
+    var arr = JSON.parse(sessionStorage.getItem("arr"));
 
     var symbolFilter = [];
 
@@ -138,8 +151,6 @@ function setPlayBookDropDownData() {
     symbolFilter.sort();
 
     sessionStorage.setItem("arrFilterSymbol", JSON.stringify(symbolFilter));
-
-    filterDataList();
 }
 
 function filterSymbolsListByExchange(value) {
@@ -157,7 +168,7 @@ function filterSymbolsListByExchange(value) {
             filteredData.push(arr.data[i].name);
         }
     }
-
+    filteredData.sort();
     sessionStorage.setItem("arrFilterSymbol", JSON.stringify(filteredData));
 }
 
@@ -171,7 +182,7 @@ function filterSymbolsListByRVal(value) {
             filteredData.push(arr.data[i].name);
         }
     }
-
+    filteredData.sort();
     sessionStorage.setItem("arrFilterSymbol", JSON.stringify(filteredData));
 }
 
@@ -180,8 +191,6 @@ function filterDataList() {
     var arrSymbols = JSON.parse(sessionStorage.getItem("arrFilterSymbol"));
     var arrData = JSON.parse(sessionStorage.getItem("arr")).data;
     let filteredData = [];
-
-
 
 
     for (var i = 0; i < arrData.length; i++) {
@@ -253,14 +262,15 @@ export function populateExchangesDropDown() {
         filterItemGroup.append(newOption.cloneNode(true));
     }
 
-    const rValArry = ["R>UT1", "R=UT1", "R=CRX+", "R=UP", "R=DIR", "R=DP", "R=CRX-", "R=DT1", "R<DT1"];
+    //const rValArry = ["R>UT1", "R=UT1", "R=CRX+", "R=UP", "R=DIR", "R=DP", "R=CRX-", "R=DT1", "R<DT1"];
+    var rValArry = JSON.parse(sessionStorage.getItem("arrFilterRValue"));
 
     let RfilterItemGroup = document.createElement("optgroup");
     RfilterItemGroup.setAttribute("label", "R=");
 
     rValArry.forEach((filterArrItem) => {
         newOption.innerText = filterArrItem;
-        newOption.setAttribute("value", filterArrItem.replace("R", ""));
+        newOption.setAttribute("value", filterArrItem);
 
         RfilterItemGroup.append(newOption.cloneNode(true));
     });
