@@ -843,7 +843,7 @@ populateAllPlayBookDropDowns();
 renderBlocks();
 
 
-document.querySelector(".page-jss-loading").style.display = "none";
+
 document
   .querySelector(".header .refresh-button")
   .addEventListener("click", async function (e) {

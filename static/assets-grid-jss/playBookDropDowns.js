@@ -1,6 +1,7 @@
 import SymbolDescription from "/static/assets-grid-jss/symbolDescription.js";
 import { getColorBlockRValue, getColorBlockRValueRegime, } from "/static/assets-grid-jss/colorBlockValues.js";
 import renderBlocks from "/static/assets-grid-jss/renderBlocks.js";
+import { FetchData } from "/static/assets-grid-jss/fetchData.js";
 import {
     setDataMode,
     setData,
@@ -12,6 +13,7 @@ import {
 
 
 export default function setUpPlaybookDropDownListeners() {
+    //console.log("setUpPlaybookDropDownListeners");
 
 	const filterBlockDates = document.getElementById("date-select-dropdown");
 	const filterExchanges = document.getElementById("indicator-select-dropdown");
@@ -19,10 +21,12 @@ export default function setUpPlaybookDropDownListeners() {
     const futuresSelect = document.getElementById("futures-select-dropdown");
 
     filterBlockSymbols.addEventListener("change", async function (e) {
-        console.log("symbol-select-dropdown = " + document.getElementById("symbol-select-dropdown").value);
+        //console.log("symbol-select-dropdown = " + document.getElementById("symbol-select-dropdown").value);
 
         const boxWrapItems = document.querySelectorAll(".boxes-wrap .item");
         const filterSymbol = document.getElementById("symbol-select-dropdown").value;
+
+        sessionStorage.setItem("symbolSelect", filterSymbol);
 
         boxWrapItems.forEach((item) => {
             if (item.dataset.fullName === filterSymbol) {
@@ -33,19 +37,23 @@ export default function setUpPlaybookDropDownListeners() {
     });
 
     filterExchanges.addEventListener("change", async function (e) {
-        console.log("indicator-select-dropdown = " + document.getElementById("indicator-select-dropdown").value);
+        //console.log("indicator-select-dropdown = " + document.getElementById("indicator-select-dropdown").value);
+        let filterExchangeDropdown = document.getElementById("indicator-select-dropdown");
 
-        var group = filterExchanges.options[filterExchanges.selectedIndex].parentElement;
+        let value = filterExchangeDropdown.value;
+        sessionStorage.setItem("exchangeSelect", value);
+
+        var group = filterExchangeDropdown.options[filterExchangeDropdown.selectedIndex].parentElement;
 
         if (group.getAttribute("label") === "EXCHANGE") {
-            filterSymbolsListByExchange(filterExchanges.value);
+            filterSymbolsListByExchange(value);
 
         }
         else if (group.getAttribute("label") === "R=") {
-            filterSymbolsListByRVal(filterExchanges.value);
+            filterSymbolsListByRVal(value);
         }
 
-        if (filterExchanges.value === "ALL") {
+        if (value === "ALL") {
             setSymbolFilterCollection();
         }
 
@@ -56,16 +64,34 @@ export default function setUpPlaybookDropDownListeners() {
     });
 
     filterBlockDates.addEventListener("change", async function (e) {
-        console.log("date-select-dropdown = " + document.getElementById("date-select-dropdown").value);
-        //filterExchanges.value = "ALL";
-        //const filterBlockDates = document.getElementById("date-select-dropdown");
-        //renderBlocksForDate(filterBlockDates.value);
-        //populateSymbolFilter();
+        //console.log("date-select-dropdown = " + document.getElementById("date-select-dropdown").value);
+
+        const value = document.getElementById("date-select-dropdown").value;
+        sessionStorage.setItem("dateSelect", value);
+
+        await FetchData(sessionStorage.getItem("futuresSelect"), value, sessionStorage.getItem("dateType"));
+
+        setExchangeFilterCollection();
+        setSymbolFilterCollection();
+
+        filterDataList();
+
+        populateExchangesDropDown();
+        populateSymbolDropDown();
+        renderBlocks();
 
     });
 
     futuresSelect.addEventListener("change", async function (e) {
-        console.log("futures-select-dropdown = " + document.getElementById("futures-select-dropdown").value);
+        //console.log("futures-select-dropdown = " + document.getElementById("futures-select-dropdown").value);
+
+        const value = document.getElementById("futures-select-dropdown").value;
+        sessionStorage.setItem("futuresSelect", value);
+        //New call to the backend DB for Crypto / Futures data.
+        //Store the response in memory
+        //Repopulate the collection for the following dropdowns: date, exchange and symbol.
+        //Remove all existing options from dropdowns and re - add based on the collection.
+        //Regenerate the tiles, PriceMap and info in the tab area.
 
     });
     
@@ -75,28 +101,47 @@ export default function setUpPlaybookDropDownListeners() {
 export function populateAllPlayBookDropDowns() {
     console.log("populateAllPlayBookDropDowns");
 
-    setPlayBookDropDownData();
+    setDateFilterCollection();
+    setExchangeFilterCollection();
+    setSymbolFilterCollection();
+
+    filterDataList();
+
     populateDatesDropDown();
     populateExchangesDropDown();
     populateSymbolDropDown();
 
 }
 
-function setPlayBookDropDownData() {
 
-    var arr = JSON.parse(sessionStorage.getItem("arr"));
-    console.log(arr);
-    //** Date Dropdown **//
-    var dateFilter = arr.filters.d;
+
+function setDateFilterCollection() {
+    var arrDates = JSON.parse(sessionStorage.getItem("arrDates"));
+
+    var dateFilter = [];
+
+
+    switch (sessionStorage.getItem("dateType")) {
+        case "D":
+            dateFilter = arrDates.d;
+            break;
+        case "W":
+            dateFilter = arrDates.w;
+            break;
+        case "M":
+            dateFilter = arrDates.m;
+            break;
+    }
+
 
     dateFilter.sort(function (a, b) {
         return new Date(b) - new Date(a);
     });
 
     sessionStorage.setItem("arrFilterDates", JSON.stringify(dateFilter));
+}
 
-    //** Exchange Dropdown **//
-
+function setExchangeFilterCollection() {
     var arrData = JSON.parse(sessionStorage.getItem("arrData"));
     var exchangeFilter = [];
     var rValueFilter = [];
@@ -130,12 +175,6 @@ function setPlayBookDropDownData() {
 
     sessionStorage.setItem("arrFilterExchange", JSON.stringify(exchangeFilter));
     sessionStorage.setItem("arrFilterRValue", JSON.stringify(rValueFilter));
-
-    //** Symbol Dropdown **//
-
-    setSymbolFilterCollection(); 
-
-    filterDataList();
 }
 
 function setSymbolFilterCollection() {

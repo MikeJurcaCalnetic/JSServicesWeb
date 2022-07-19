@@ -7,21 +7,61 @@ import {
 	setRefreshUrl,
 } from "./status.js";
 
+
+//https://6tlrxvd6d9.execute-api.ap-south-1.amazonaws.com/live/getlist?getdata=binance&date=2022-06-27&datetype=D
+//https://6tlrxvd6d9.execute-api.ap-south-1.amazonaws.com/live/getlist?getdata=binance&date=2022-06-27&datetype=W
+//https://6tlrxvd6d9.execute-api.ap-south-1.amazonaws.com/live/getlist?getdata=binance&date=2022-06-26&datetype=M
+
 export default async function InitalDataFetch() {
-	console.log('InitalDataFetch');
-	await FetchDataForTable("binance");
+	//console.log('InitalDataFetch');
+    await FetchDateFiltersForTable("binance");
+    await FetchData("binance", JSON.parse(sessionStorage.getItem("arrDates")).d[0], "D");
+    sessionStorage.setItem("dateType", "D");
+    sessionStorage.setItem("futuresSelect", "binance");
+    sessionStorage.setItem("dateSelect", JSON.parse(sessionStorage.getItem("arrDates")).d[0]);
+}
+
+export async function FetchDateFiltersForTable(tableName) {
+    document.querySelector(".page-jss-loading").style.display = "block";
+    //console.log('FetchDataForTable ' + tableName);
+
+    const url =
+        "https://6tlrxvd6d9.execute-api.ap-south-1.amazonaws.com/live/getlist?getfilters=";
+
+    let arrfilters = await fetch(url + tableName)
+        .then((r) => r.text())
+        .then((r) => JSON.parse(r.replace(/GDAX/g, "COINBASE")))
+        .then((r) => r);
+
+    arrfilters.filters.d.sort(function (a, b) {
+        return new Date(b) - new Date(a);
+    });
+
+    arrfilters.filters.w.sort(function (a, b) {
+        return new Date(b) - new Date(a);
+    });
+
+    arrfilters.filters.m.sort(function (a, b) {
+        return new Date(b) - new Date(a);
+    });
+
+
+    sessionStorage.setItem("arrDates", JSON.stringify(arrfilters.filters));
+    document.querySelector(".page-jss-loading").style.display = "none";
 }
 
 
-async function FetchDataForTable(tableName) {
-	console.log('FetchDataForTable ' + tableName);
+
+export async function FetchData(tableName, date, dateType) {
+    console.log('FetchDataForTableForDate table: ' + tableName + ", Date: " + date + ", dateType: " + dateType);
+    document.querySelector(".page-jss-loading").style.display = "block";
 
 	setDataMode(tableName);
 
 	const url =
-		"https://6tlrxvd6d9.execute-api.ap-south-1.amazonaws.com/live/getlist?getfilters=";
+        "https://6tlrxvd6d9.execute-api.ap-south-1.amazonaws.com/live/getlist?getdata=binance&date=" + date + "&datetype=" + dateType;
 
-	let arr = await fetch(url + tableName)
+	let arr = await fetch(url)
 		.then((r) => r.text())
 		.then((r) => JSON.parse(r.replace(/GDAX/g, "COINBASE")))
 		.then((r) => r);
@@ -29,13 +69,11 @@ async function FetchDataForTable(tableName) {
 
     setDateStamps();
 
-	//console.log(JSON.stringify(arr.data));
 
 	sessionStorage.setItem("arr", JSON.stringify(arr));
 	sessionStorage.setItem("arrData", JSON.stringify(arr.data));
 
-//    var arrData = JSON.parse(sessionStorage.getItem("arrData"));
-	//    var arrData = JSON.parse(sessionStorage.getItem("arrFilterDates"));
+    document.querySelector(".page-jss-loading").style.display = "none";
 }
 
 function setDateStamps() {
