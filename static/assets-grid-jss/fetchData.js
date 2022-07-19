@@ -27,7 +27,7 @@ async function FetchDataForTable(tableName) {
 		.then((r) => r);
 
 
-	console.log(JSON.stringify(arr.data));
+	//console.log(JSON.stringify(arr.data));
 
 	localStorage.setItem("arr", JSON.stringify(arr));
 	localStorage.setItem("arrData", JSON.stringify(arr.data));

@@ -3,7 +3,7 @@ import dateUpdates from "/static/assets-grid-jss/dataUpdates.js";
 import { getRefreshUrl } from "/static/assets-grid-jss/status.js";
 //import renderFilters from "/static/assets-grid-jss/renderFilters.js";
 import InitalDataFetch from "/static/assets-grid-jss/fetchData.js";
-import setUpDropDownListeners, { populateAllDropDowns} from "/static/assets-grid-jss/dropDowns.js";
+import setUpPlaybookDropDownListeners, { populateAllPlayBookDropDowns } from "/static/assets-grid-jss/playBookDropDowns.js";
 
 dateUpdates();
 
@@ -835,9 +835,10 @@ function setTradeHeadersValues(e, arr) {
     });
   });
 }
-//setUpDropDownListeners();
-//await InitalDataFetch();
-//populateAllDropDowns();
+
+setUpPlaybookDropDownListeners();
+await InitalDataFetch();
+populateAllPlayBookDropDowns();
 document.querySelector(".page-jss-loading").style.display = "none";
 document
   .querySelector(".header .refresh-button")
