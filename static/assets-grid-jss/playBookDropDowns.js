@@ -1,4 +1,6 @@
 import SymbolDescription from "/static/assets-grid-jss/symbolDescription.js";
+import { getColorBlockRValue, getColorBlockRValueRegime, } from "/static/assets-grid-jss/colorBlockValues.js";
+import renderBlocks from "/static/assets-grid-jss/renderBlocks.js";
 import {
     setDataMode,
     setData,
@@ -33,15 +35,25 @@ export default function setUpPlaybookDropDownListeners() {
     filterExchanges.addEventListener("change", async function (e) {
         console.log("indicator-select-dropdown = " + document.getElementById("indicator-select-dropdown").value);
 
-        //var group = filterExchanges.options[filterExchanges.selectedIndex].parentElement;
+        //Retrieve data from the memory and Repopulate the collection for the Symbol dropdown. 
+        //Remove blocks / tiles that are not relevant to the selected Exchange.
+        //Remove all existing options from the Symbol dropdown.
+        //Regenerate the tiles, PriceMap and info in the tab area.
 
-        //if (group.getAttribute("label") === "EXCHANGE") {
-        //    filterItemsByIndicator(filterExchanges.value);
-        //}
-        //else if (group.getAttribute("label") === "R=") {
-        //    filterItemsByRVal(filterExchanges.value);
-        //}
-        //populateSymbolFilter();
+
+        var group = filterExchanges.options[filterExchanges.selectedIndex].parentElement;
+
+        if (group.getAttribute("label") === "EXCHANGE") {
+            filterSymbolsListByExchange(filterExchanges.value);
+
+        }
+        else if (group.getAttribute("label") === "R=") {
+            filterSymbolsListByRVal(filterExchanges.value);
+        }
+
+        populateSymbolDropDown(); 
+        filterDataList();
+        renderBlocks();
 
     });
 
@@ -75,7 +87,7 @@ export function populateAllPlayBookDropDowns() {
 function setPlayBookDropDownData() {
 
     var arr = JSON.parse(sessionStorage.getItem("arr"));
-
+    console.log(arr);
     //** Date Dropdown **//
     var dateFilter = arr.filters.d;
 
@@ -127,12 +139,50 @@ function setPlayBookDropDownData() {
 
     sessionStorage.setItem("arrFilterSymbol", JSON.stringify(symbolFilter));
 
-    filterDataList(symbolFilter, arr.data);
+    filterDataList();
 }
 
-function filterDataList(arrSymbols, arrData) {
+function filterSymbolsListByExchange(value) {
+
+    var arr = JSON.parse(sessionStorage.getItem("arr"));
+
+    var arrSymbols = [];
 
     let filteredData = [];
+    var splitedValue = value.split(".");
+
+    for (var i = 0; i < arr.data.length; i++) {
+
+        if (arr.data[i].name.includes(splitedValue[0])) {
+            filteredData.push(arr.data[i].name);
+        }
+    }
+
+    sessionStorage.setItem("arrFilterSymbol", JSON.stringify(filteredData));
+}
+
+function filterSymbolsListByRVal(value) {
+    var arr = JSON.parse(sessionStorage.getItem("arr"));
+
+    let filteredData = [];
+
+    for (var i = 0; i < arr.data.length; i++) {
+        if (value.includes(getColorBlockRValueRegime(arr.data[i]))) {
+            filteredData.push(arr.data[i].name);
+        }
+    }
+
+    sessionStorage.setItem("arrFilterSymbol", JSON.stringify(filteredData));
+}
+
+function filterDataList() {
+
+    var arrSymbols = JSON.parse(sessionStorage.getItem("arrFilterSymbol"));
+    var arrData = JSON.parse(sessionStorage.getItem("arr")).data;
+    let filteredData = [];
+
+
+
 
     for (var i = 0; i < arrData.length; i++) {
 
@@ -146,6 +196,7 @@ function filterDataList(arrSymbols, arrData) {
 
 export function populateSymbolDropDown() {
     const filterBlockSymbols = document.getElementById("symbol-select-dropdown");
+    filterBlockSymbols.innerHTML = '';
 
     var arrSymbols = JSON.parse(sessionStorage.getItem("arrFilterSymbol"));
 
@@ -178,6 +229,7 @@ export function populateSymbolDropDown() {
 
 export function populateExchangesDropDown() {
     const filterExchanges = document.getElementById("indicator-select-dropdown");
+    filterExchanges.innerHTML = '';
 
     let newOption = document.createElement("option");
 
@@ -219,6 +271,7 @@ export function populateExchangesDropDown() {
 
 export function populateDatesDropDown() {
     const filterBlockDates = document.getElementById("date-select-dropdown");
+    filterBlockDates.innerHTML = '';
 
     let newOption = document.createElement("option");
 

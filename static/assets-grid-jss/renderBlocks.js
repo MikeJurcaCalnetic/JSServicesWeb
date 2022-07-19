@@ -33,10 +33,8 @@ export default async function renderBlocks() {
 
     const boxWrap = document.querySelector(".boxes-wrap");
   
+    boxWrap.innerHTML = '';
 
-    while (boxWrap.firstChild) {
-      boxWrap.removeChild(boxWrap.lastChild);
-    }
 
     blockGroupArr.forEach((blockItem) => {
       let trendtypeData = getColorBlockTrendTypeObj(blockItem);
