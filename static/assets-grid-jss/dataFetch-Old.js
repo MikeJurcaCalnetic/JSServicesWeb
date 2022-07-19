@@ -13,6 +13,7 @@ import {
 
 
 export default async function FetchData(tableName = "binance", reload = false) {
+    console.log("FetchData");
   document.querySelector(".page-jss-loading").style.display = "block";
   tableName = tableName.toLowerCase();
 

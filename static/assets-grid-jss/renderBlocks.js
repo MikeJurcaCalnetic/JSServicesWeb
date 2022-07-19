@@ -1,29 +1,24 @@
 import getColorBlockTrendTypeObj from "/static/assets-grid-jss/trendType.js";
-import {renderSymbolFilter, setSymbolFilter } from "/static/assets-grid-jss/renderFilters.js";
+//import {renderSymbolFilter, setSymbolFilter } from "/static/assets-grid-jss/renderFilters.js";
 import renderBlockInformationOnClick from "/static/assets-grid-jss/events.js";
 import renderPriceMap, { setClosestSymbolDateWeek, setClosestSymbolDateMonth, } from "/static/assets-grid-jss/renderPriceMap.js";
 import { getColorBlockRValue, getColorBlockRValueRegime, } from "/static/assets-grid-jss/colorBlockValues.js";
 import { getDataMode, getData } from "/static/assets-grid-jss/status.js";
 import getMsbTextColor from "/static/assets-grid-jss/getMsbTextColor.js";
-import { getDataByDate } from "/static/assets-grid-jss/dataFetch.js";
+//import { getDataByDate } from "/static/assets-grid-jss/dataFetch.js";
 
-export default async function renderBlocks(blockGroup, dataByDate = false) {
-  let arr;
- 
-  if (dataByDate != false) {
-    arr = dataByDate;
-  } else {
-    arr = await getDataByDate(blockGroup);
-    }
+export default async function renderBlocks(ForDate) {
+    console.log("renderBlocks");
 
-    localStorage.setItem("arr", JSON.stringify(arr));
+
+    let arr = JSON.parse(localStorage.getItem("arrData"));
 
   if (await arr) {
     let blockGroupArr = arr
       .filter((item) => {
         const endsOn = item.name.slice(item.name.length - 2, item.name.length);
 
-        return item["date"] === blockGroup && endsOn === ".D";
+          return item["date"] === ForDate && endsOn === ".D";
       })
       .sort(function (a, b) {
         const titleA = a.name.toLowerCase(),
@@ -34,7 +29,7 @@ export default async function renderBlocks(blockGroup, dataByDate = false) {
       });
 
     const boxWrap = document.querySelector(".boxes-wrap");
-    let thisDateObj = new Date(blockGroup);
+      let thisDateObj = new Date(ForDate);
     const filterBlockSymbols = document.getElementById("symbol-select-dropdown");;
       const filterBlockIndicators = document.getElementById("indicator-select-dropdown");
   
@@ -137,7 +132,7 @@ export default async function renderBlocks(blockGroup, dataByDate = false) {
       if (blockGroupArr[0] == blockItem) item.click();
     });
     }
-    renderSymbolFilter();
+    //renderSymbolFilter();
 }
 export function setTradeHeadersValues(e, arr) {
   const blockData = e.target.dataset;

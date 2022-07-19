@@ -10,7 +10,7 @@ import Structure from "/static/assets-grid-jss/structure.js";
 import getMarketAttributesByCode from "/static/assets-grid-jss/marketAtributes.js";
 import Strategy from "/static/assets-grid-jss/strategy.js";
 import timePhases from "/static/assets-grid-jss/timePhases.js";
-import { getDataByDate } from "/static/assets-grid-jss/dataFetch.js";
+//import { getDataByDate } from "/static/assets-grid-jss/dataFetch.js";
 
 export default async function renderBlockInformationOnClick(e) {
 

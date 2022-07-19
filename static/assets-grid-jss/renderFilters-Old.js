@@ -5,6 +5,7 @@ import renderBlockInformationOnClick from "/static/assets-grid-jss/events.js";
 import SymbolDescription from "/static/assets-grid-jss/symbolDescription.js";
 
 export default function renderFilters(filterArrDates, dataByDate) {
+    console.log("FetchData");
   const today = new Date();
   const nextDay = new Date();
   nextDay.setDate(today.getDate() + 1);
@@ -22,13 +23,18 @@ export default function renderFilters(filterArrDates, dataByDate) {
     filterBlockSymbols.innerHTML = "";
 
     filterBlockSymbols.addEventListener("change", async function (e) {
-  
 
+
+        const boxWrapItems = document.querySelectorAll(".boxes-wrap .item");
         const filterSymbol = document.getElementById("symbol-select-dropdown").value;
 
-        var box = document.querySelector('.' + filterSymbol);
+        boxWrapItems.forEach((item) => {
+            if (item.dataset.fullName === filterSymbol)
+            {
+                item.click();
+            }
+        });
 
-        box.click();
 
     });
 
@@ -43,7 +49,7 @@ export default function renderFilters(filterArrDates, dataByDate) {
         else if (group.getAttribute("label") === "R=") {
             filterItemsByRVal(filterBlockIndicators.value);
         }
-        renderSymbolFilter();
+        //renderSymbolFilter();
 
     });
 
@@ -54,21 +60,31 @@ export default function renderFilters(filterArrDates, dataByDate) {
 
     });
 
-  if (getDataMode() === "futures") {
-      filterBlockIndicators.style.display = "none";
-  } else {
-     filterBlockIndicators.style.display = "block";
-    dataByDate.forEach((item) => {
-      var filter = item.name.split(".")[0];
 
-        filter = filter.replace(/GDAX/g, "CoinBase");
+   
 
 
-      if (!filterArrIndicators.includes(filter))
-        filterArrIndicators.push(filter);
-    });
+    if (getDataMode() === "futures") {
+        dataByDate.forEach((item) => {
+            var filter = "";
+
+            filter = item.MARKET;
+
+            if (!filterArrIndicators.includes(filter))
+                filterArrIndicators.push(filter);
+        });
     }
+    else {
+        dataByDate.forEach((item) => {
+            var filter = "";
 
+            filter = item.name.split(".")[0];
+            filter = filter.replace(/GDAX/g, "CoinBase");
+
+            if (!filterArrIndicators.includes(filter))
+                filterArrIndicators.push(filter);
+        });
+    }
 
 
   filterArrDates
@@ -174,17 +190,20 @@ export function renderSymbolFilter() {
             var filterItem = document.createElement("option");
             filterItem.className = "filter-item";
 
-            var splitedFilterName = blocks[i].classList[1].split("_");
-            var filterName = splitedFilterName[1];
+            var splitedFilterName = blocks[i].dataset["fullName"].split(".");
+          
+            var filterName = "";
 
             if (getDataMode() === "futures") {
+                filterName = splitedFilterName[0];
                 filterItem.innerText = filterName + " - " + SymbolDescription(filterName);
             }
             else {
+                filterName = splitedFilterName[1];
                 filterItem.innerText = filterName + " - " + splitedFilterName[0];
             }
 
-            filterItem.setAttribute("value", blocks[i].classList[1]);
+            filterItem.setAttribute("value", blocks[i].dataset["fullName"]);
 
             filterBlockSymbols.append(filterItem);
 

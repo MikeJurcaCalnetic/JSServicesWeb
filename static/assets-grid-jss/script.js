@@ -1,7 +1,10 @@
 import dateUpdates from "/static/assets-grid-jss/dataUpdates.js";
-import dataFetch from "/static/assets-grid-jss/dataFetch.js";
+//import dataFetch from "/static/assets-grid-jss/dataFetch.js";
 import { getRefreshUrl } from "/static/assets-grid-jss/status.js";
-import renderFilters from "/static/assets-grid-jss/renderFilters.js";
+//import renderFilters from "/static/assets-grid-jss/renderFilters.js";
+import InitalDataFetch from "/static/assets-grid-jss/fetchData.js";
+import setUpDropDownListeners, { populateAllDropDowns} from "/static/assets-grid-jss/dropDowns.js";
+
 dateUpdates();
 
 document.querySelectorAll(".section-info .header .tab a").forEach((item) => {
@@ -832,13 +835,12 @@ function setTradeHeadersValues(e, arr) {
     });
   });
 }
-dataFetch();
+//setUpDropDownListeners();
+//await InitalDataFetch();
+//populateAllDropDowns();
+document.querySelector(".page-jss-loading").style.display = "none";
 document
   .querySelector(".header .refresh-button")
   .addEventListener("click", async function (e) {
-    e.preventDefault;
-    let tableName = getRefreshUrl();
-    const newData = await dataFetch(tableName, true);
-    const { filters, data } = await newData;
-    renderFilters(await filters.d, await data);
+      //CODE HERE
   });

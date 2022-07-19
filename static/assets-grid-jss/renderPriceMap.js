@@ -1,6 +1,6 @@
 import { getColorBlockRRisk } from "/static/assets-grid-jss/colorBlockValues.js";
 import { getDataMode } from "/static/assets-grid-jss/status.js";
-import { getDataByDate } from "/static/assets-grid-jss/dataFetch.js";
+//import { getDataByDate } from "/static/assets-grid-jss/dataFetch.js";
 
 const tradesWrap = document.querySelector(".trades-wrap .trades-wrap_values");
 const tradesWrapR = document.querySelector(".trades-wrap .trades-wrap_rValue");
