@@ -27,11 +27,40 @@ async function FetchDataForTable(tableName) {
 		.then((r) => r);
 
 
+    setDateStamps();
+
 	//console.log(JSON.stringify(arr.data));
 
-	localStorage.setItem("arr", JSON.stringify(arr));
-	localStorage.setItem("arrData", JSON.stringify(arr.data));
+	sessionStorage.setItem("arr", JSON.stringify(arr));
+	sessionStorage.setItem("arrData", JSON.stringify(arr.data));
 
-//    var arrData = JSON.parse(localStorage.getItem("arrData"));
-	//    var arrData = JSON.parse(localStorage.getItem("arrFilterDates"));
+//    var arrData = JSON.parse(sessionStorage.getItem("arrData"));
+	//    var arrData = JSON.parse(sessionStorage.getItem("arrFilterDates"));
+}
+
+function setDateStamps() {
+    var utcDate = new Date();
+    var utcDateStr = utcDate.toLocaleString("en-US", {
+        year: 'numeric',
+        month: 'numeric',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        second: 'numeric'
+    })
+    var userDate = new Date(utcDateStr + " UTC");
+    var locale = window.navigator.userLanguage || window.navigator.language;
+    var clientDateTimeStr = userDate.toLocaleString(locale, {
+        year: 'numeric',
+        month: 'numeric',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        second: 'numeric'
+    });
+    //console.log(utcDateStr);
+    //console.log(clientDateTimeStr);
+
+    document.getElementById("utc-date-stamp").innerHTML = utcDateStr;
+    document.getElementById("local-date-stamp").innerHTML = clientDateTimeStr;
 }

@@ -11,7 +11,7 @@ const tradesWrapRisk = document.querySelector(
 export default async function renderPriceMap(e) {
     //var arr = await getDataByDate(document.getElementById("date-select-dropdown").value);
 
-    var arr = JSON.parse(localStorage.getItem("arr"));
+    var arr = JSON.parse(sessionStorage.getItem("arrFilteredData"));
 
   const thisBlock = e.target;
   const priceMapArr = [

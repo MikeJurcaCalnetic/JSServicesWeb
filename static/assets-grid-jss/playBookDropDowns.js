@@ -18,14 +18,15 @@ export default function setUpPlaybookDropDownListeners() {
 
     filterBlockSymbols.addEventListener("change", async function (e) {
         console.log("symbol-select-dropdown = " + document.getElementById("symbol-select-dropdown").value);
-        //const boxWrapItems = document.querySelectorAll(".boxes-wrap .item");
-        //const filterSymbol = document.getElementById("symbol-select-dropdown").value;
 
-        //boxWrapItems.forEach((item) => {
-        //    if (item.dataset.fullName === filterSymbol) {
-        //        item.click();
-        //    }
-        //});
+        const boxWrapItems = document.querySelectorAll(".boxes-wrap .item");
+        const filterSymbol = document.getElementById("symbol-select-dropdown").value;
+
+        boxWrapItems.forEach((item) => {
+            if (item.dataset.fullName === filterSymbol) {
+                item.click();
+            }
+        });
 
     });
 
@@ -56,7 +57,6 @@ export default function setUpPlaybookDropDownListeners() {
     futuresSelect.addEventListener("change", async function (e) {
         console.log("futures-select-dropdown = " + document.getElementById("futures-select-dropdown").value);
 
-
     });
     
 
@@ -74,7 +74,7 @@ export function populateAllPlayBookDropDowns() {
 
 function setPlayBookDropDownData() {
 
-    var arr = JSON.parse(localStorage.getItem("arr"));
+    var arr = JSON.parse(sessionStorage.getItem("arr"));
 
     //** Date Dropdown **//
     var dateFilter = arr.filters.d;
@@ -83,11 +83,11 @@ function setPlayBookDropDownData() {
         return new Date(b) - new Date(a);
     });
 
-    localStorage.setItem("arrFilterDates", JSON.stringify(dateFilter));
+    sessionStorage.setItem("arrFilterDates", JSON.stringify(dateFilter));
 
     //** Exchange Dropdown **//
 
-    var arrData = JSON.parse(localStorage.getItem("arrData"));
+    var arrData = JSON.parse(sessionStorage.getItem("arrData"));
     var exchangeFilter = [];
 
     if (getDataMode() === "futures") {
@@ -112,7 +112,7 @@ function setPlayBookDropDownData() {
         });
     }
 
-    localStorage.setItem("arrFilterExchange", JSON.stringify(exchangeFilter));
+    sessionStorage.setItem("arrFilterExchange", JSON.stringify(exchangeFilter));
 
     //** Symbol Dropdown **//
 
@@ -125,14 +125,29 @@ function setPlayBookDropDownData() {
 
     symbolFilter.sort();
 
-    localStorage.setItem("arrFilterSymbol", JSON.stringify(symbolFilter));
+    sessionStorage.setItem("arrFilterSymbol", JSON.stringify(symbolFilter));
 
+    filterDataList(symbolFilter, arr.data);
+}
+
+function filterDataList(arrSymbols, arrData) {
+
+    let filteredData = [];
+
+    for (var i = 0; i < arrData.length; i++) {
+
+        if (arrSymbols.includes(arrData[i].name)) {
+            filteredData.push(arrData[i]);
+        }
+    }
+
+    sessionStorage.setItem("arrFilteredData", JSON.stringify(filteredData));
 }
 
 export function populateSymbolDropDown() {
     const filterBlockSymbols = document.getElementById("symbol-select-dropdown");
 
-    var arrSymbols = JSON.parse(localStorage.getItem("arrFilterSymbol"));
+    var arrSymbols = JSON.parse(sessionStorage.getItem("arrFilterSymbol"));
 
     let newOption = document.createElement("option");
 
@@ -173,7 +188,7 @@ export function populateExchangesDropDown() {
     AllOption.setAttribute("style", "font-weight: 900;");
     filterExchanges.append(AllOption);
 
-    var arrExchanges = JSON.parse(localStorage.getItem("arrFilterExchange"));
+    var arrExchanges = JSON.parse(sessionStorage.getItem("arrFilterExchange"));
 
     let filterItemGroup = document.createElement("optgroup");
     filterItemGroup.setAttribute("label", "EXCHANGE");
@@ -207,11 +222,17 @@ export function populateDatesDropDown() {
 
     let newOption = document.createElement("option");
 
-    var arrDates = JSON.parse(localStorage.getItem("arrFilterDates"));
+    var arrDates = JSON.parse(sessionStorage.getItem("arrFilterDates"));
 
     for (var i = 0; i < arrDates.length; i++) {
         newOption.innerText = arrDates[i];
         newOption.setAttribute("value", arrDates[i]);
         filterBlockDates.append(newOption.cloneNode(true));
     }
+}
+
+export function setCurrentSymbolDropDown(e) {
+    //console.log("setCurrentSymbolDropDown = " + e);
+    const filterBlockSymbols = document.getElementById("symbol-select-dropdown");
+    filterBlockSymbols.value = e;
 }

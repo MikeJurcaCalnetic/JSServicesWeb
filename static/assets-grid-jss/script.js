@@ -4,6 +4,7 @@ import { getRefreshUrl } from "/static/assets-grid-jss/status.js";
 //import renderFilters from "/static/assets-grid-jss/renderFilters.js";
 import InitalDataFetch from "/static/assets-grid-jss/fetchData.js";
 import setUpPlaybookDropDownListeners, { populateAllPlayBookDropDowns } from "/static/assets-grid-jss/playBookDropDowns.js";
+import renderBlocks from "/static/assets-grid-jss/renderBlocks.js";
 
 dateUpdates();
 
@@ -839,6 +840,9 @@ function setTradeHeadersValues(e, arr) {
 setUpPlaybookDropDownListeners();
 await InitalDataFetch();
 populateAllPlayBookDropDowns();
+renderBlocks();
+
+
 document.querySelector(".page-jss-loading").style.display = "none";
 document
   .querySelector(".header .refresh-button")

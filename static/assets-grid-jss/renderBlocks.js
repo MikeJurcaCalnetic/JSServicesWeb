@@ -5,17 +5,20 @@ import renderPriceMap, { setClosestSymbolDateWeek, setClosestSymbolDateMonth, } 
 import { getColorBlockRValue, getColorBlockRValueRegime, } from "/static/assets-grid-jss/colorBlockValues.js";
 import { getDataMode, getData } from "/static/assets-grid-jss/status.js";
 import getMsbTextColor from "/static/assets-grid-jss/getMsbTextColor.js";
+import { setCurrentSymbolDropDown } from "/static/assets-grid-jss/playBookDropDowns.js";
 //import { getDataByDate } from "/static/assets-grid-jss/dataFetch.js";
 
-export default async function renderBlocks(ForDate) {
+export default async function renderBlocks() {
     console.log("renderBlocks");
 
+    let ForDate = document.getElementById("date-select-dropdown").value;
+     
+    var arr = JSON.parse(sessionStorage.getItem("arrFilteredData"));
 
-    let arr = JSON.parse(localStorage.getItem("arrData"));
-
-  if (await arr) {
+  if (arr) {
     let blockGroupArr = arr
-      .filter((item) => {
+        .filter((item) => {
+      
         const endsOn = item.name.slice(item.name.length - 2, item.name.length);
 
           return item["date"] === ForDate && endsOn === ".D";
@@ -29,9 +32,6 @@ export default async function renderBlocks(ForDate) {
       });
 
     const boxWrap = document.querySelector(".boxes-wrap");
-      let thisDateObj = new Date(ForDate);
-    const filterBlockSymbols = document.getElementById("symbol-select-dropdown");;
-      const filterBlockIndicators = document.getElementById("indicator-select-dropdown");
   
 
     while (boxWrap.firstChild) {
@@ -112,10 +112,10 @@ export default async function renderBlocks(ForDate) {
       itemWrap.addEventListener("click", function (e) {
         e.currentTarget.children[0].click();
       });
+
+
       item.addEventListener("click", async (e) => {
-        document.querySelectorAll(".filter").forEach((item) => {
-          item.classList.remove("show");
-        });
+
         document
           .querySelectorAll(".page-jss .section-boxes .boxes-wrap .item ")
           .forEach((item) => {
@@ -125,15 +125,15 @@ export default async function renderBlocks(ForDate) {
         await renderBlockInformationOnClick(e);
         await renderPriceMap(e);
           setTradeHeadersValues(e, arr);
-          
-        setSymbolFilter(e.target.classList[1]);
+          setCurrentSymbolDropDown(e.target.getAttribute("data-full-name"));
       });
 
       if (blockGroupArr[0] == blockItem) item.click();
     });
     }
-    //renderSymbolFilter();
 }
+
+
 export function setTradeHeadersValues(e, arr) {
   const blockData = e.target.dataset;
   const timePeriod = document.querySelectorAll(

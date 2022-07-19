@@ -16,7 +16,7 @@ export default async function renderBlockInformationOnClick(e) {
 
 
    // var arr = await getDataByDate(document.getElementById("date-select-dropdown").value);
-    var arr = JSON.parse(localStorage.getItem("arr"));
+    var arr = JSON.parse(sessionStorage.getItem("arrFilteredData"));
 
   const blockData = e.target.dataset;
 
