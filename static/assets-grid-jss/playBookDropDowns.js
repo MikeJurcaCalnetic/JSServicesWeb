@@ -1,7 +1,7 @@
 import SymbolDescription from "/static/assets-grid-jss/symbolDescription.js";
 import { getColorBlockRValue, getColorBlockRValueRegime, } from "/static/assets-grid-jss/colorBlockValues.js";
 import renderBlocks from "/static/assets-grid-jss/renderBlocks.js";
-import { FetchData } from "/static/assets-grid-jss/fetchData.js";
+import { FetchData, FetchDateFiltersForTable } from "/static/assets-grid-jss/fetchData.js";
 import {
     setDataMode,
     setData,
@@ -87,11 +87,16 @@ export default function setUpPlaybookDropDownListeners() {
 
         const value = document.getElementById("futures-select-dropdown").value;
         sessionStorage.setItem("futuresSelect", value);
-        //New call to the backend DB for Crypto / Futures data.
-        //Store the response in memory
-        //Repopulate the collection for the following dropdowns: date, exchange and symbol.
-        //Remove all existing options from dropdowns and re - add based on the collection.
-        //Regenerate the tiles, PriceMap and info in the tab area.
+
+        await FetchDateFiltersForTable(value);
+        await FetchData(value, JSON.parse(sessionStorage.getItem("arrDates")).d[0], "D");
+
+        sessionStorage.setItem("dateType", "D");
+        sessionStorage.setItem("dateSelect", JSON.parse(sessionStorage.getItem("arrDates")).d[0]);
+
+        populateAllPlayBookDropDowns();
+  
+        renderBlocks();
 
     });
     

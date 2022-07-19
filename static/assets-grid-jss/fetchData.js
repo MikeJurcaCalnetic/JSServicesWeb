@@ -23,7 +23,7 @@ export default async function InitalDataFetch() {
 
 export async function FetchDateFiltersForTable(tableName) {
     document.querySelector(".page-jss-loading").style.display = "block";
-    //console.log('FetchDataForTable ' + tableName);
+    console.log('FetchDateFiltersForTable ' + tableName);
 
     const url =
         "https://6tlrxvd6d9.execute-api.ap-south-1.amazonaws.com/live/getlist?getfilters=";
@@ -45,7 +45,7 @@ export async function FetchDateFiltersForTable(tableName) {
         return new Date(b) - new Date(a);
     });
 
-
+    console.log(arrfilters);
     sessionStorage.setItem("arrDates", JSON.stringify(arrfilters.filters));
     document.querySelector(".page-jss-loading").style.display = "none";
 }
@@ -59,7 +59,7 @@ export async function FetchData(tableName, date, dateType) {
 	setDataMode(tableName);
 
 	const url =
-        "https://6tlrxvd6d9.execute-api.ap-south-1.amazonaws.com/live/getlist?getdata=binance&date=" + date + "&datetype=" + dateType;
+        "https://6tlrxvd6d9.execute-api.ap-south-1.amazonaws.com/live/getlist?getdata=" + tableName+"&date=" + date + "&datetype=" + dateType;
 
 	let arr = await fetch(url)
 		.then((r) => r.text())
@@ -68,7 +68,7 @@ export async function FetchData(tableName, date, dateType) {
 
 
     setDateStamps();
-
+    console.log(arr);
 
 	sessionStorage.setItem("arr", JSON.stringify(arr));
 	sessionStorage.setItem("arrData", JSON.stringify(arr.data));
